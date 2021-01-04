@@ -1,0 +1,5 @@
+jwt:
+  client-id: bachelor-thesis
+  client-secret: mysecret
+  accessTokenValiditySeconds: 120
+  refreshTokenValiditySeconds: 78000
