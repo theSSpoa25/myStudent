@@ -3,6 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthenticationService } from 'src/app/_services/api/authentication.service';
 import { catchError, first, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { UserState } from 'src/app/store/reducers/user.reducer';
+import { Action } from 'rxjs/internal/scheduler/Action';
+import { userLogin } from 'src/app/store/actions/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +23,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private store: Store<UserState>
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +36,7 @@ export class LoginComponent implements OnInit {
       first(),
       map( res => {
        this.invalid = false;
-       console.log(res);
+       this.store.dispatch(userLogin({user: res}));
       }),
       catchError(error => {
         this.invalid = true;
