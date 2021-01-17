@@ -17,6 +17,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpErrorInterceptor } from './_interceptors/http-error.interceptor';
 import { userLogout } from './store/actions/user.actions';
 import { UserEffects } from './store/effects/user.effects';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { UserEffects } from './store/effects/user.effects';
     }),
     EffectsModule.forRoot([UserEffects]),
     SharedModule,
-    NgSelectModule
+    NgSelectModule,
+    FontAwesomeModule
   ],
   providers: [
     {
