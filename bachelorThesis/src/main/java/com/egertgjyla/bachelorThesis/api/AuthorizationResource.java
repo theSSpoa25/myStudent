@@ -1,7 +1,9 @@
 package com.egertgjyla.bachelorThesis.api;
 
 import com.egertgjyla.bachelorThesis.domain.pojo.login.LoginRequest;
+import com.egertgjyla.bachelorThesis.domain.pojo.user.UserCreate;
 import com.egertgjyla.bachelorThesis.service.authentication.AuthenticationServiceImpl;
+import com.egertgjyla.bachelorThesis.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +19,19 @@ public class AuthorizationResource {
     @Autowired
     AuthenticationServiceImpl authenticationService;
 
+    @Autowired
+    IUserService userService;
+
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         return this.authenticationService.authenticateUser(loginRequest);
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<?> getTest() {
+    @PostMapping("/create")
+    public ResponseEntity<?> createUser(@Valid @RequestBody UserCreate userCreate) {
+        this.userService.createUser(userCreate);
+
         return ResponseEntity.ok(HttpEntity.EMPTY);
     }
-
 }

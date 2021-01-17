@@ -1,13 +1,11 @@
 package com.egertgjyla.bachelorThesis.service.authentication;
 
-import com.egertgjyla.bachelorThesis.config.security.AuthenticationTokenFilter;
 import com.egertgjyla.bachelorThesis.config.security.JwtUtils;
 import com.egertgjyla.bachelorThesis.domain.pojo.login.LoginRequest;
 import com.egertgjyla.bachelorThesis.domain.pojo.login.LoginResponse;
 import com.egertgjyla.bachelorThesis.repository.RoleRepository;
 import com.egertgjyla.bachelorThesis.repository.UserRepository;
-import com.egertgjyla.bachelorThesis.service.user.UserDetailsImpl;
-import liquibase.pro.packaged.A;
+import com.egertgjyla.bachelorThesis.service.userDetails.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

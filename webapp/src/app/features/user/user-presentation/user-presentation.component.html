@@ -1,0 +1,26 @@
+<div class="container-fluid" *ngIf="user">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="user-content">
+                <div class="user-info-item d-flex align-items-center">
+                    <span>Id: </span>
+                    <span>{{user.id}}</span>
+                </div>
+                <div class="user-info-item d-flex align-items-center">
+                    <span>Username: </span>
+                    <span>{{user.username}}</span>
+                </div>
+                <div class="user-info-item d-flex align-items-center">
+                    <span>Emaol: </span>
+                    <span>{{user.email}}</span>
+                </div>
+                <div class="user-info-item d-flex align-items-center">
+                    <span>Roles: </span>
+                    <ng-container *ngIf="user?.roles">
+                        <span *ngFor="let role of user.roles">{{role}}</span>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

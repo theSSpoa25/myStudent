@@ -1,7 +1,8 @@
-package com.egertgjyla.bachelorThesis.service.user;
+package com.egertgjyla.bachelorThesis.service.userDetails;
 
 import com.egertgjyla.bachelorThesis.domain.entity.User;
 import com.egertgjyla.bachelorThesis.repository.UserRepository;
+import com.egertgjyla.bachelorThesis.service.userDetails.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control form-control-md" formControlName="username">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control form-control-md" formControlName="email">
+                </div>
+                <div class="form-group">
+                    <label>Roles</label>
+                    <ng-select
+                        [items]="roles"
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [searchable]="false"
+                        placeholder="Select role"
+                        formControlName="roles"
+                        >
+                    </ng-select>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control form-control-md" formControlName="password">
+                </div>
+                <div class="form-group">
+                    <label>Confirm password</label>
+                    <input type="password" class="form-control form-control-md" formControlName="confirm">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-prime btn-md">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

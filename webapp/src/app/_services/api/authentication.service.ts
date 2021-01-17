@@ -18,7 +18,6 @@ export class AuthenticationService {
     const loginRequest: LoginRequest = new LoginRequest(username, password);
     return this.http.post<LoginResponse>(`${environment.apiEndpoint}/auth/signin`, loginRequest, {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json'
       }),
       observe: 'body'

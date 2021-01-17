@@ -1,4 +1,4 @@
-package com.egertgjyla.bachelorThesis.service.user;
+package com.egertgjyla.bachelorThesis.service.userDetails;
 
 import com.egertgjyla.bachelorThesis.domain.entity.User;
 import org.codehaus.jackson.annotate.JsonIgnore;

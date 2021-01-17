@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { UserState } from 'src/app/store/reducers/user.reducer';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { userLogin } from 'src/app/store/actions/user.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authenticationService: AuthenticationService,
-    private store: Store<UserState>
+    private store: Store<UserState>,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
       map( res => {
        this.invalid = false;
        this.store.dispatch(userLogin({user: res}));
+       this.router.navigate(['/'])
       }),
       catchError(error => {
         this.invalid = true;

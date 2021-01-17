@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginResponse } from './_models/authentication/LoginResponse';
+import { select, Store } from '@ngrx/store';
+import { of, Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { IAppState } from './store/reducers';
+import { getUser } from './store/selectors/user.selectors';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +12,24 @@ import { LoginResponse } from './_models/authentication/LoginResponse';
 })
 export class AppComponent implements OnInit {
   title = 'webapp';
-  user: any  | LoginResponse;
-
+  public user$: any;
+  public userIsLogged = false;
+  
   constructor(
+    private store: Store<IAppState>
   ) {
   }
 
   ngOnInit() {
-    
+    this.user$ = this.store.pipe(select(getUser)).pipe(
+      switchMap( user => {
+        if (user.token) {
+          this.userIsLogged = true;
+        }
+        return of(user)
+      })
+    ).subscribe()
+
+    console.log(this.user$)
   }
 }
