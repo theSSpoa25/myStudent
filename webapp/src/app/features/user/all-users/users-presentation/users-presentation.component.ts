@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { faEye, faTrash, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { User } from 'src/app/_models/user/User';
@@ -6,11 +6,14 @@ import { User } from 'src/app/_models/user/User';
 @Component({
   selector: 'app-users-presentation',
   templateUrl: './users-presentation.component.html',
-  styleUrls: ['./users-presentation.component.scss']
+  styleUrls: ['./users-presentation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersPresentationComponent implements OnInit {
 
   @Input() users!: User[] | null;
+  @Output() onViewUser: EventEmitter<number> = new EventEmitter<number>();
+
   loadingIndicator = true;
   reorderable = true;
   selected: any[] = [];
@@ -43,9 +46,8 @@ export class UsersPresentationComponent implements OnInit {
     console.log('Activate Event', event);
   }
 
-  viewUser(value: any) {
-    console.log(value)
-
+  viewUser(value: number) {
+    this.onViewUser.emit(value);
   }
 
   editUser(value: any) {

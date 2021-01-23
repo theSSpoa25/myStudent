@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faBell, faCog, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { userLogout } from 'src/app/store/actions/user.actions';
@@ -8,12 +9,15 @@ import { getUser } from 'src/app/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html'
+  templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
 
   private userId!: number;
-
+  faBell = faBell;
+  faCog = faCog;
+  faSearch = faSearch;
+  
   constructor(
     private store: Store<UserState>,
     private router: Router

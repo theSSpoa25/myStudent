@@ -4,7 +4,9 @@
             <h2>All Users</h2>
         </div>
         <div class="row">
-            <app-users-presentation *ngIf="allUsers$ | async" [users]="allUsers$ | async"></app-users-presentation>
+            <app-users-presentation *ngIf="allUsers$ | async as users" [users]="users"
+                (onViewUser)="viewUser($event)"
+            ></app-users-presentation>
         </div>
     </div>
 </div>

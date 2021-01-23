@@ -1,6 +1,5 @@
-<ng-container *ngIf="users">
-    <ngx-datatable class="bootstrap" [rows]="users" [columns]="columns" [headerHeight]="40" [limit]="10"
-        rowHeight="auto" [reorderable]="reorderable" [selected]="selected" [selectionType]="SelectionType.checkbox"
+    <ngx-datatable class="bootstrap fullscreen" [rows]="users" [columns]="columns" [headerHeight]="40" [limit]="10"  [footerHeight]="50" 
+        rowHeight="auto" [reorderable]="reorderable" [selected]="selected" [selectionType]="SelectionType.checkbox" [loadingIndicator]="users !== null"
         (select)="onSelect($event)">
         <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
             [resizeable]="false">
@@ -13,7 +12,7 @@
                 <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Id">
+        <ngx-datatable-column name="Id" [width]="30" >
             <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
             </ng-template>
             <ng-template let-value="value" ngx-datatable-cell-template>
@@ -21,7 +20,7 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Username">
+        <ngx-datatable-column name="Username" [width]="200">
             <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
             </ng-template>
             <ng-template let-value="value" ngx-datatable-cell-template>
@@ -29,7 +28,7 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Email">
+        <ngx-datatable-column name="Email" [width]="400">
             <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
             </ng-template>
             <ng-template let-value="value" ngx-datatable-cell-template>
@@ -37,7 +36,7 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Roles">
+        <ngx-datatable-column name="Roles" [width]="400">
             <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
             </ng-template>
             <ng-template let-value="value" ngx-datatable-cell-template>
@@ -52,11 +51,10 @@
             </ng-template>
             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                 <div class="actions">
-                    <button type="button" (click)="viewUser(row.id)" class="btn btn-sm btn-default"> <fa-icon [icon]="faEye"></fa-icon></button>
+                    <button type="button" (click)="viewUser(row.id)" class="btn btn-sm btn-primary"> <fa-icon [icon]="faEye"></fa-icon></button>
                     <button type="button" (click)="editUser(row.id)" class="btn btn-sm btn-success mx-2"> <fa-icon [icon]="faUserEdit"></fa-icon></button>
                     <button type="button" (click)="deleteUser(row.id)" class="btn btn-sm btn-danger"> <fa-icon [icon]="faTrash"></fa-icon></button>
                 </div>
             </ng-template>
         </ngx-datatable-column>
     </ngx-datatable>
-</ng-container>

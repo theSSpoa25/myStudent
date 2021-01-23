@@ -23,7 +23,6 @@ export class AuthGuard implements CanActivate {
     return this.store.pipe(select(getUser)).pipe(
       switchMap( user => {
         if(user.token) {
-          console.log(user.token)
           return of(true);
         }
         

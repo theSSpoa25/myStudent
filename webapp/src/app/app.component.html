@@ -1,16 +1,18 @@
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-2">
+<div class="container-fluid no-gutters no-padding">
+    <div class="row no-gutters">
+        <div class="col"><app-header *ngIf="userIsLogged"></app-header></div>
+    </div>
+    <div class="row no-gutters">
+    <div class="col-md-2">
             <app-dashboard></app-dashboard>
         </div>
-        <div class="col-lg-10">
+    <div class="col-md-10">
             <div class="container-fluid">
                 <div class="row">
-                    <app-header *ngIf="userIsLogged"></app-header>
-                </div>
-                <div class="row">
-                    <router-outlet></router-outlet>
+                    <div class="pt-3">
+                        <router-outlet></router-outlet>
+                    </div>
                 </div>
             </div>
         </div>
