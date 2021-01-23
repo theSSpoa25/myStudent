@@ -1,0 +1,62 @@
+<ng-container *ngIf="users">
+    <ngx-datatable class="bootstrap" [rows]="users" [columns]="columns" [headerHeight]="40" [limit]="10"
+        rowHeight="auto" [reorderable]="reorderable" [selected]="selected" [selectionType]="SelectionType.checkbox"
+        (select)="onSelect($event)">
+        <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
+            [resizeable]="false">
+            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                let-selectFn="selectFn">
+                <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                let-onCheckboxChangeFn="onCheckboxChangeFn">
+                <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Id">
+            <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
+            </ng-template>
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                {{ value }}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Username">
+            <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
+            </ng-template>
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                {{ value }}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Email">
+            <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
+            </ng-template>
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                {{ value }}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Roles">
+            <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
+            </ng-template>
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                <span *ngFor="let role of value">
+                    {{role.role}}
+                </span>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Actions" [sortable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template class="text-center"><strong>{{ column.name }}</strong>
+            </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <div class="actions">
+                    <button type="button" (click)="viewUser(row.id)" class="btn btn-sm btn-default"> <fa-icon [icon]="faEye"></fa-icon></button>
+                    <button type="button" (click)="editUser(row.id)" class="btn btn-sm btn-success mx-2"> <fa-icon [icon]="faUserEdit"></fa-icon></button>
+                    <button type="button" (click)="deleteUser(row.id)" class="btn btn-sm btn-danger"> <fa-icon [icon]="faTrash"></fa-icon></button>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</ng-container>

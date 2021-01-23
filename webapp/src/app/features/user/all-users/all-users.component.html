@@ -1,0 +1,10 @@
+<div class="container-fluid">
+    <div class="col">
+        <div class="row">
+            <h2>All Users</h2>
+        </div>
+        <div class="row">
+            <app-users-presentation *ngIf="allUsers$ | async" [users]="allUsers$ | async"></app-users-presentation>
+        </div>
+    </div>
+</div>

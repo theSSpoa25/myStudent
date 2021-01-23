@@ -1,6 +1,8 @@
 package com.egertgjyla.bachelorThesis.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +26,7 @@ public class User {
     private String email;
 
     @NotNull
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

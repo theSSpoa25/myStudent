@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserState } from 'src/app/store/reducers/user.reducer';
 import { getUser } from 'src/app/store/selectors/user.selectors';
@@ -28,6 +29,16 @@ export class UserService {
         'Content-Type': 'application/json',
         'Authorization': `${this.token}`,
       },
+    })
+  }
+
+  public getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiEndpoint}/user/all`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${this.token}`,
+      },
+      observe: 'body'
     })
   }
 }

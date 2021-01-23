@@ -18,11 +18,14 @@ import { HttpErrorInterceptor } from './_interceptors/http-error.interceptor';
 import { userLogout } from './store/actions/user.actions';
 import { UserEffects } from './store/effects/user.effects';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HomeComponent } from './features/home/home.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     EffectsModule.forRoot([UserEffects]),
     SharedModule,
     NgSelectModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxDatatableModule
   ],
   providers: [
     {

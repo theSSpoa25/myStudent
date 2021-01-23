@@ -9,16 +9,22 @@ import { UserPresentationComponent } from './user-presentation/user-presentation
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { UsersPresentationComponent } from './all-users/users-presentation/users-presentation.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
-  declarations: [UserViewComponent, UserComponent, UserPresentationComponent, CreateUserComponent],
+  declarations: [UserViewComponent, UserComponent, UserPresentationComponent, CreateUserComponent, AllUsersComponent, UsersPresentationComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxDatatableModule,
+    FontAwesomeModule
   ]
 })
 export class UserModule { }

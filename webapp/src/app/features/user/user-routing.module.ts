@@ -2,6 +2,7 @@ import { AUTO_STYLE } from '@angular/animations';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/_guards/auth.guard';
+import { AllUsersComponent } from './all-users/all-users.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import { UserComponent } from './user.component';
@@ -22,6 +23,11 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreateUserComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'all',
+    component: AllUsersComponent,
     canActivate: [AuthGuard]
   }
 ];
