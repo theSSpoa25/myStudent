@@ -12,11 +12,12 @@ import { User } from 'src/app/_models/user/User';
 export class UsersPresentationComponent implements OnInit {
 
   @Input() users!: User[] | null;
+  @Input() selected: any[] = [];
   @Output() onViewUser: EventEmitter<number> = new EventEmitter<number>();
 
   loadingIndicator = true;
   reorderable = true;
-  selected: any[] = [];
+  
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
   columns = [

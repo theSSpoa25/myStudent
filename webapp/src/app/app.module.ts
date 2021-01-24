@@ -15,11 +15,11 @@ import { reducers, metaReducers } from './store/reducers';
 import { SharedModule } from './_shared/_shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpErrorInterceptor } from './_interceptors/http-error.interceptor';
-import { userLogout } from './store/actions/user.actions';
 import { UserEffects } from './store/effects/user.effects';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './features/home/home.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { UserFilterComponent } from './_shared/modals/user-filter/user-filter.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +53,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

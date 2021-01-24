@@ -4,23 +4,29 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-
+import { UserFilterComponent } from './modals/user-filter/user-filter.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserFilterComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([]),
-    FontAwesomeModule
+    FontAwesomeModule,
+    ModalModule.forRoot(),
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserFilterComponent
   ],
+  entryComponents: [UserFilterComponent]
 })
 export class SharedModule {
 }

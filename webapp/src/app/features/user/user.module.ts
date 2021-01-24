@@ -13,6 +13,7 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { UsersPresentationComponent } from './all-users/users-presentation/users-presentation.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     NgSelectModule,
     NgxDatatableModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ModalModule.forRoot()
   ]
 })
 export class UserModule { }

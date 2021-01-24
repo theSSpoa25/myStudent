@@ -3,9 +3,17 @@
         <div class="row">
             <h2>All Users</h2>
         </div>
+        <div class="row d-flex justify-content-end">
+            <div class="table-actions">
+                <button type="button" class="btn-md btn btn-light" (click)="onMakeActive()"><fa-icon [icon]="faPlusCircle"></fa-icon> Enable</button>
+                <button type="button" class="btn-md btn btn-light mx-2" (click)="onDelete()"><fa-icon [icon]="faTrash"></fa-icon> Disable</button>
+                <button type="button" class="btn-md btn btn-light" (click)="onFilter()"><fa-icon [icon]="faFIlter"></fa-icon> Filter</button>
+            </div>
+        </div>
         <div class="row">
             <app-users-presentation *ngIf="allUsers$ | async as users" [users]="users"
                 (onViewUser)="viewUser($event)"
+                [selected]="selected"
             ></app-users-presentation>
         </div>
     </div>

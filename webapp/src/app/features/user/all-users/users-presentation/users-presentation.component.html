@@ -1,5 +1,5 @@
-    <ngx-datatable class="bootstrap fullscreen" [rows]="users" [columns]="columns" [headerHeight]="40" [limit]="10"  [footerHeight]="50" 
-        rowHeight="auto" [reorderable]="reorderable" [selected]="selected" [selectionType]="SelectionType.checkbox" [loadingIndicator]="users !== null"
+    <ngx-datatable class="bootstrap fullscreen" [rows]="users" [columns]="columns" [headerHeight]="40" [limit]="10"  [footerHeight]="50" [columnMode]="ColumnMode.standard"
+        rowHeight="auto" [reorderable]="reorderable" [selected]="selected" [selectionType]="SelectionType.checkbox" [loadingIndicator]="users === null"
         (select)="onSelect($event)">
         <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
             [resizeable]="false">
@@ -12,7 +12,7 @@
                 <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Id" [width]="30" >
+        <ngx-datatable-column name="Id" [width]="40" >
             <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
             </ng-template>
             <ng-template let-value="value" ngx-datatable-cell-template>
