@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -36,6 +37,14 @@ public class UserResource {
         List<User> users = userRepository.findAll();
 
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping(path = {"/{id}"})
+    public ResponseEntity<?> getUser(@PathVariable(name = "id", required = true) Long id) {
+        Optional<User> user = userRepository.findById(id);
+
+        return ResponseEntity.ok(user);
+
     }
 
 

@@ -41,4 +41,14 @@ export class UserService {
       observe: 'body'
     })
   }
+
+  public getUser(id: number): Observable<User> {
+    return this.http.get<User>(`${environment.apiEndpoint}/user/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${this.token}`,
+      },
+      observe: 'body'
+    })
+  }
 }

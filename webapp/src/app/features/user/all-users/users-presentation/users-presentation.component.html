@@ -12,7 +12,7 @@
                 <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Id" [width]="40" >
+        <ngx-datatable-column name="Id" >
             <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
             </ng-template>
             <ng-template let-value="value" ngx-datatable-cell-template>
@@ -20,7 +20,7 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Username" [width]="200">
+        <ngx-datatable-column name="Username">
             <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
             </ng-template>
             <ng-template let-value="value" ngx-datatable-cell-template>
@@ -28,7 +28,7 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Email" [width]="400">
+        <ngx-datatable-column name="Email">
             <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
             </ng-template>
             <ng-template let-value="value" ngx-datatable-cell-template>
@@ -36,7 +36,7 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Roles" [width]="400">
+        <ngx-datatable-column name="Roles">
             <ng-template let-column="column" ngx-datatable-header-template><strong>{{ column.name }}</strong>
             </ng-template>
             <ng-template let-value="value" ngx-datatable-cell-template>
