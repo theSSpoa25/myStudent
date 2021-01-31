@@ -5,11 +5,18 @@ import com.egertgjyla.bachelorThesis.domain.pojo.login.LoginResponse;
 import com.egertgjyla.bachelorThesis.domain.pojo.user.UserCreate;
 import com.egertgjyla.bachelorThesis.repository.UserRepository;
 import com.egertgjyla.bachelorThesis.service.user.IUserService;
+import com.egertgjyla.bachelorThesis.service.user.UserServiceImpl;
+import net.kaczmarzyk.spring.data.jpa.domain.Equal;
+import net.kaczmarzyk.spring.data.jpa.domain.Like;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,12 +47,26 @@ public class UserResource {
     }
 
     @GetMapping(path = {"/{id}"})
-    public ResponseEntity<?> getUser(@PathVariable(name = "id", required = true) Long id) {
+    public ResponseEntity<Optional<User>> getUser(@PathVariable(name = "id", required = true) Long id) {
         Optional<User> user = userRepository.findById(id);
-
         return ResponseEntity.ok(user);
-
     }
 
+    @Transactional
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<User>> get(
+            @And({
+                    @Spec(path = "username", params = "username", spec = Like.class),
+                    @Spec(path = "id", params = "id", spec = Equal.class),
+                    @Spec(path = "email", params = "email", spec = Like.class),
+            }) Specification<User> specification,
+            Sort sort,
+            @RequestHeader HttpHeaders headers
+            ) {
 
+        final List<User> response = userService.searchUser(specification, headers);
+
+        return ResponseEntity.ok(response);
+    }
 }

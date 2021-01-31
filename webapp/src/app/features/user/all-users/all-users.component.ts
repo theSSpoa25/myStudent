@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/_models/user/User';
 import { UserService } from 'src/app/_services/api/user.service';
 import { UserFilterComponent } from 'src/app/_shared/modals/user-filter/user-filter.component';
-
+import omitBy from 'lodash/omitBy';
 @Component({
   selector: 'app-all-users',
   templateUrl: './all-users.component.html',
@@ -59,9 +59,34 @@ export class AllUsersComponent implements OnInit {
     }
     this.modalRef = this.modalService.show(UserFilterComponent, {initialState});
 
-    this.modalRef.content.event.subscribe((res:  string) => {
-      console.log(res)
+    this.modalRef.content.event.subscribe((fg:  FormGroup) => {
+      console.log(fg)
+      let searchQuery = this.getSearchQuery(fg);
+
+
+      console.log(searchQuery)
+      this.router.navigate(['/user/all'], {queryParams: this.getFilledFields(fg)});
+      this.allUsers$ = this.userService.searchUser(searchQuery);
     });
   }
 
+
+  private getSearchQuery(fg: FormGroup) {
+    let searchQuery = '';
+
+    Object.keys(fg.value).forEach(
+      key => {
+        const value = fg.get(key)?.value;
+
+        if (value) {
+          searchQuery += `${key}=${value}&`;
+        }
+      }
+    );
+    return searchQuery;
+  }
+
+  private getFilledFields(fg: FormGroup) {
+    return omitBy(fg.value, (value) => {console.log('value', value); return !value || value.length === 0})
+  }
 }

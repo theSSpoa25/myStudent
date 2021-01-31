@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { String } from 'lodash';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserState } from 'src/app/store/reducers/user.reducer';
@@ -44,6 +45,16 @@ export class UserService {
 
   public getUser(id: number): Observable<User> {
     return this.http.get<User>(`${environment.apiEndpoint}/user/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${this.token}`,
+      },
+      observe: 'body'
+    })
+  }
+
+  public searchUser(searchQuery: string): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiEndpoint}/user?${searchQuery}`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `${this.token}`,
