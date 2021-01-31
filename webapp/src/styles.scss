@@ -1,9 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+// regular style toast
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '~@swimlane/ngx-datatable/index.css';
 @import '~@swimlane/ngx-datatable/themes/bootstrap.scss';
 @import '~@swimlane/ngx-datatable/themes/material.scss';
 @import '~@swimlane/ngx-datatable/assets/icons.css';
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~ngx-toastr/toastr-bs4-alert';
+
 
 // HELPERS
 .no-gutters {

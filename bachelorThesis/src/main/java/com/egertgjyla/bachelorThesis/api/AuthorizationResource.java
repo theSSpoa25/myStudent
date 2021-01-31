@@ -27,11 +27,4 @@ public class AuthorizationResource {
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         return this.authenticationService.authenticateUser(loginRequest);
     }
-
-    @PostMapping("/create")
-    public ResponseEntity<?> createUser(@Valid @RequestBody UserCreate userCreate) {
-        this.userService.createUser(userCreate);
-
-        return ResponseEntity.ok(HttpEntity.EMPTY);
-    }
 }

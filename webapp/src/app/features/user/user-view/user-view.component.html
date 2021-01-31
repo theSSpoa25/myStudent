@@ -1,1 +1,1 @@
-<app-user-presentation [user]="user$ | async"></app-user-presentation>
+<app-user-presentation *ngIf="user$ | async as user" [user]="user" (testEvent)="onUserUpdate($event)"></app-user-presentation>

@@ -52,11 +52,15 @@ public class AuthenticationServiceImpl implements IAuthenticationService{
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(new LoginResponse(
-                jwt,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles
-        ));
+                        jwt,
+                        userDetails.getId(),
+                        userDetails.getUsername(),
+                        userDetails.getEmail(),
+                        roles,
+                        userDetails.getName(),
+                        userDetails.getSurname(),
+                        userDetails.getAddress(),
+                        userDetails.getActive()
+                ));
     }
 }

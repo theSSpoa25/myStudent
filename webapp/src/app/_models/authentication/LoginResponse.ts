@@ -4,4 +4,8 @@ export interface LoginResponse {
     token: string;
     email: string;
     roles: string[];
+    name: string;
+    surname: string;
+    active: boolean;
+    address: string;
 }

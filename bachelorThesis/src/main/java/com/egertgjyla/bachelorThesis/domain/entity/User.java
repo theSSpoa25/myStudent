@@ -2,9 +2,11 @@ package com.egertgjyla.bachelorThesis.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
@@ -22,8 +24,49 @@ public class User {
     private String username;
 
     @NotNull
+    private String name;
+
+    @NotNull
+    private String surname;
+
+    @NotNull
     @Email
     private String email;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    @Nullable
+    private String address;
 
     @NotNull
     @JsonIgnore
@@ -35,14 +78,21 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @Column(columnDefinition = "boolean default true")
+    private Boolean active;
+
+
 
     public User() {
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, String name, String surname, String address) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.address = address;
+        this.name = name;
+        this.surname = surname;
     }
 
     public Long getId() {
@@ -79,6 +129,19 @@ public class User {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(email, user.email) && Objects.equals(address, user.address) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles) && Objects.equals(active, user.active);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, name, surname, email, address, password, roles, active);
     }
 
     public void setRoles(Set<Role> roles) {

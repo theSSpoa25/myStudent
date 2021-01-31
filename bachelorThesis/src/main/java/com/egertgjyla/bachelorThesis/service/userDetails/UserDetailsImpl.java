@@ -5,7 +5,6 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,18 +17,26 @@ public class UserDetailsImpl implements UserDetails {
     private Long id;
     private String username;
     private String email;
+    private String address;
+    private String name;
+    private String surname;
+    private boolean active;
 
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(Long id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities, String name, String surname, String address, Boolean active) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.active = active;
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
     }
 
     public static UserDetailsImpl build(User user) {
@@ -37,13 +44,17 @@ public class UserDetailsImpl implements UserDetails {
                     .map( role -> new SimpleGrantedAuthority(role.getRole().name()))
                     .collect(Collectors.toList());
 
-        return new UserDetailsImpl (
-                user.getId(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getPassword(),
-                authorities
-        );
+        return new UserDetailsImpl(
+                        user.getId(),
+                        user.getUsername(),
+                        user.getEmail(),
+                        user.getPassword(),
+                        authorities,
+                        user.getAddress(),
+                        user.getName(),
+                        user.getSurname(),
+                        user.getActive()
+                );
     }
 
 
@@ -79,6 +90,14 @@ public class UserDetailsImpl implements UserDetails {
     public String getEmail() {
         return email;
     }
+
+    public String getName() {return name;}
+
+    public String getSurname() {return surname;}
+
+    public  String getAddress() {return address;}
+
+    public Boolean getActive() {return active;}
 
     @Override
     public String getPassword() {

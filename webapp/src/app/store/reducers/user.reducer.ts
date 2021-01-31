@@ -12,7 +12,11 @@ const initialState: UserState = {
     id: null!,
     roles: null!,
     token: null!,
-    username: null!
+    username: null!,
+    name: null!,
+    surname: null!,
+    active: null!,
+    address: null!
 }
 
 export const userReducer = createReducer<UserState>(
@@ -24,7 +28,11 @@ export const userReducer = createReducer<UserState>(
             email: action.user.email,
             roles: action.user.roles,
             token: action.user.token,
-            username: action.user.username
+            username: action.user.username,
+            name: action.user.name,
+            surname: action.user.surname,
+            address: action.user.address,
+            active: action.user.active
         }
     }),
     on(UserActions.userLogout, (state): UserState => {
@@ -34,7 +42,11 @@ export const userReducer = createReducer<UserState>(
             email: null!,
             roles: null!,
             token: null!,
-            username: null!
+            username: null!,
+            name: null!,
+            surname: null!,
+            active: null!,
+            address: null!
         }
     })
 )

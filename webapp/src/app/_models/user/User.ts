@@ -4,4 +4,8 @@ export interface User {
     token?: string;
     email: string;
     roles: string[];
+    name: string;
+    surname: string;
+    address: string;
+    active: boolean;
 }

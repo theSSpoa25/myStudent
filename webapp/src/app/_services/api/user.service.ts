@@ -62,4 +62,14 @@ export class UserService {
       observe: 'body'
     })
   }
+
+  public updateUser(id: number | undefined, userUpdate: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiEndpoint}/user/update/${id}`, userUpdate, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${this.token}`,
+      },
+      observe: 'body'
+    })
+  }
 }

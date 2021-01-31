@@ -1,5 +1,7 @@
 package com.egertgjyla.bachelorThesis.api;
 
+import com.egertgjyla.bachelorThesis.domain.dto.user.CreateUserRequest;
+import com.egertgjyla.bachelorThesis.domain.dto.user.UpdateUserRequest;
 import com.egertgjyla.bachelorThesis.domain.entity.User;
 import com.egertgjyla.bachelorThesis.domain.pojo.login.LoginResponse;
 import com.egertgjyla.bachelorThesis.domain.pojo.user.UserCreate;
@@ -33,10 +35,10 @@ public class UserResource {
     UserRepository userRepository;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createUser(@RequestBody UserCreate userCreate) {
-       this.userService.createUser(userCreate);
+    public ResponseEntity<Long> createUser(@RequestBody CreateUserRequest userCreate) {
+      Long createdUserId = this.userService.createUser(userCreate);
 
-       return ResponseEntity.ok(HttpEntity.EMPTY);
+       return ResponseEntity.ok(createdUserId);
     }
 
     @GetMapping("/all")
@@ -68,5 +70,12 @@ public class UserResource {
         final List<User> response = userService.searchUser(specification, headers);
 
         return ResponseEntity.ok(response);
+    }
+
+    @RequestMapping(path="/update/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable(name = "id", required = true) Long id, @RequestBody UpdateUserRequest updateUserRequest) {
+        Boolean updated = userService.updateUser(updateUserRequest, id);
+
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

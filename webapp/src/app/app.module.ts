@@ -19,7 +19,8 @@ import { UserEffects } from './store/effects/user.effects';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './features/home/home.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { UserFilterComponent } from './_shared/modals/user-filter/user-filter.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,15 @@ import { UserFilterComponent } from './_shared/modals/user-filter/user-filter.co
     SharedModule,
     NgSelectModule,
     FontAwesomeModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ToastrModule.forRoot(
+      {
+        positionClass: 'toast-top-center',
+        timeOut: 3000,
+        preventDuplicates: true,
+      }
+    ), // ToastrModule added
+    BrowserAnimationsModule
   ],
   providers: [
     {

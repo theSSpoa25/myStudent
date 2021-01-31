@@ -9,7 +9,7 @@
                         </div>
                         <div class="content-details">
                           <div class="username">
-                            <span class="ml-2"><strong>{{user.username}}</strong></span>
+                            <span class="ml-2"><strong>{{user?.name}} {{user?.surname}}</strong></span>
                           </div>
                           <span class="text-primary mx-2">Change profile picture</span>
                           <span class="text-danger">Remove</span>
@@ -26,50 +26,48 @@
                     About
                 </div>
                 <div class="card-body">
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                        <form [formGroup]="userForm">
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label>Name</label>
+                              <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label>Surname</label>
+                              <input type="text" class="form-control" placeholder="Surname" formControlName="surname">
+                            </div>
                           </div>
-                          <div class="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputAddress2">Username</label>
+                              <input type="text" class="form-control" placeholder="Username" formControlName="username">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label>Roles</label>
+                              <ng-select
+                                  [items]="roles"
+                                  [multiple]="true"
+                                  [closeOnSelect]="false"
+                                  [searchable]="false"
+                                  placeholder="Select role"
+                                  formControlName="roles"
+                                  >
+                              </ng-select>
                           </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="inputAddress">Address</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                        </div>
-                        <div class="form-group">
-                          <label for="inputAddress2">Address 2</label>
-                          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                        </div>
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity">
                           </div>
-                          <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <select id="inputState" class="form-control">
-                              <option selected>Choose...</option>
-                              <option>...</option>
-                            </select>
+                          
+                          <div class="form-group">
+                            <label for="inputAddress">Address</label>
+                            <input type="text" class="form-control" placeholder="Address" formControlName="address">
                           </div>
-                          <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
+                          <div class="form-group">
+                            <label for="inputAddress">Email</label>
+                            <input type="email" class="form-control" placeholder="Email" formControlName="email">
                           </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">
-                              Check me out
-                            </label>
-                          </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Change</button>
+                          
+                          <button type="submit" class="btn btn-primary" (click)="saveChanges()">Save Change</button>
+                          <button type="button" class="btn btn-primary ml-2" [ngClass]="{'btn-danger': user.active}">{{user?.active ? 'Deactivate' : 'Activate'}} User</button>
+                        </form>
                 </div>
             </div>
         </div>

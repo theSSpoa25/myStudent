@@ -1,19 +1,20 @@
 package com.egertgjyla.bachelorThesis.service.user;
 
+import com.egertgjyla.bachelorThesis.domain.dto.user.CreateUserRequest;
+import com.egertgjyla.bachelorThesis.domain.dto.user.UpdateUserRequest;
 import com.egertgjyla.bachelorThesis.domain.entity.Role;
 import com.egertgjyla.bachelorThesis.domain.entity.User;
 import com.egertgjyla.bachelorThesis.domain.entity.UserRole;
-import com.egertgjyla.bachelorThesis.domain.pojo.user.UserCreate;
+import com.egertgjyla.bachelorThesis.repository.RoleRepository;
 import com.egertgjyla.bachelorThesis.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("userService")
 public class UserServiceImpl implements  IUserService{
@@ -21,12 +22,18 @@ public class UserServiceImpl implements  IUserService{
     UserRepository userRepository;
 
     @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void createUser(UserCreate userCreate) {
+    public Long createUser(CreateUserRequest userCreate) {
         User user = new User(
                 userCreate.getUsername(),
                 userCreate.getEmail(),
+                userCreate.getAddress(),
+                userCreate.getName(),
+                userCreate.getSurname(),
                 passwordEncoder.encode(userCreate.getPassword())
         );
 
@@ -36,11 +43,30 @@ public class UserServiceImpl implements  IUserService{
             user.getRoles().add(newRole);
         }
 
-        this.userRepository.saveAndFlush(user);
+        User savedUser = this.userRepository.saveAndFlush(user);
+        return savedUser.getId();
     }
 
     @Override
     public List<User> searchUser(Specification<User> userSpecification, HttpHeaders headers) {
         return userRepository.findAll(userSpecification);
+    }
+
+    @Override
+    public Boolean updateUser(UpdateUserRequest userRequest, Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setName(userRequest.getName());
+            user.setSurname(userRequest.getSurname());
+            user.setUsername(userRequest.getUsername());
+            user.setAddress(userRequest.getAddress());
+            user.setEmail(userRequest.getEmail());
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 }
