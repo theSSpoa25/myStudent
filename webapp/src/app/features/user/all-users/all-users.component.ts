@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faFilter, faPlusCircle, faTrash, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Observable } from 'rxjs';
+import { iif, Observable } from 'rxjs';
 import { User } from 'src/app/_models/user/User';
 import { UserService } from 'src/app/_services/api/user.service';
 import { UserFilterComponent } from 'src/app/_shared/modals/user-filter/user-filter.component';
 import omitBy from 'lodash/omitBy';
+import isEmpty from 'lodash/isEmpty';
 @Component({
   selector: 'app-all-users',
   templateUrl: './all-users.component.html',
@@ -28,17 +29,39 @@ export class AllUsersComponent implements OnInit {
     id: this.fb.control(''),
     active: this.fb.control(false)
   })
+  queryParams: any;
 
   constructor(
     private userService: UserService,
     private router: Router,
     private modalService: BsModalService,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.queryParams = this.activatedRoute.snapshot.queryParams;
+    this.setFilterValues();
+  }
+
+  private setFilterValues() {
+    //TODO check for another solution
+    if (!isEmpty(this.queryParams)) {
+      Object.keys(this.queryParams).forEach(key => {
+        const control = this.filterForm.get(key);
+
+        if (control) {
+          control.setValue(this.queryParams[key]);
+          control.patchValue(this.queryParams[key]);
+        }
+      });
+    }
+  }
 
   ngOnInit(): void {
-    this.allUsers$ = this.userService.getAllUsers().pipe(
-    );
+    this.allUsers$ = iif(
+      () => isEmpty(this.queryParams),
+      this.userService.getAllUsers(),
+      this.allUsers$ = this.userService.searchUser(this.getSearchQuery(this.filterForm))
+    )
   }
 
   editUser(id: number) {
@@ -71,7 +94,7 @@ export class AllUsersComponent implements OnInit {
   }
 
 
-  private getSearchQuery(fg: FormGroup) {
+  private getSearchQuery(fg: FormGroup | any) {
     let searchQuery = '';
 
     Object.keys(fg.value).forEach(
