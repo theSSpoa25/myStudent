@@ -1,4 +1,4 @@
-    <ngx-datatable class="bootstrap fullscreen" [rows]="users" [columns]="columns" [headerHeight]="40" [limit]="10"  [footerHeight]="50" [columnMode]="ColumnMode.standard"
+    <ngx-datatable class="bootstrap fullscreen" [rows]="users" [columns]="columns" [headerHeight]="40" [limit]="10"  [footerHeight]="50" [columnMode]="ColumnMode.force"
         rowHeight="auto" [reorderable]="reorderable" [selected]="selected" [selectionType]="SelectionType.checkbox" [loadingIndicator]="users === null"
         (select)="onSelect($event)">
         <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
@@ -51,7 +51,6 @@
             </ng-template>
             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                 <div class="actions">
-                    <button type="button" (click)="viewUser(row.id)" class="btn btn-sm btn-primary"> <fa-icon [icon]="faEye"></fa-icon></button>
                     <button type="button" (click)="editUser(row.id)" class="btn btn-sm btn-success mx-2"> <fa-icon [icon]="faUserEdit"></fa-icon></button>
                     <button type="button" (click)="deleteUser(row.id)" class="btn btn-sm btn-danger"> <fa-icon [icon]="faTrash"></fa-icon></button>
                 </div>

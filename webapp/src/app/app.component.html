@@ -1,13 +1,13 @@
 
 <div class="container-fluid no-gutters no-padding">
-    <div class="row no-gutters">
-        <div class="col"><app-header *ngIf="userIsLogged"></app-header></div>
+    <div class="row no-gutters"  *ngIf="userIsLogged">
+        <div class="col"><app-header></app-header></div>
     </div>
     <div class="row no-gutters">
-    <div class="col-md-2">
+    <div class="col-md-2" *ngIf="userIsLogged">
             <app-dashboard></app-dashboard>
-        </div>
-    <div class="col-md-10">
+    </div>
+    <div class="col-md-10" [ngClass]="{'col-md-12': !userIsLogged}">
             <div class="container-fluid">
                 <div class="row pt-3">
                     <div class="col">

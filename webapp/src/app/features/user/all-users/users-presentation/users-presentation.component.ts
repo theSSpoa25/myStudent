@@ -13,7 +13,7 @@ export class UsersPresentationComponent implements OnInit {
 
   @Input() users!: User[] | null;
   @Input() selected: any[] = [];
-  @Output() onViewUser: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onEditUser: EventEmitter<number> = new EventEmitter<number>();
 
   loadingIndicator = true;
   reorderable = true;
@@ -47,13 +47,8 @@ export class UsersPresentationComponent implements OnInit {
     console.log('Activate Event', event);
   }
 
-  viewUser(value: number) {
-    this.onViewUser.emit(value);
-  }
-
-  editUser(value: any) {
-    console.log(value)
-
+  editUser(id: number) {
+    this.onEditUser.emit(id);
   }
 
   deleteUser(value: any) {

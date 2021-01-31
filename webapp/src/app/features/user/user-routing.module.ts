@@ -16,7 +16,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: ':id/view',
+    path: ':id/edit',
     component: UserViewComponent,
     canActivate: [AuthGuard]
   },

@@ -41,8 +41,8 @@ export class AllUsersComponent implements OnInit {
     );
   }
 
-  viewUser(id: number) {
-    this.router.navigate([`user/${id}/view`]);
+  editUser(id: number) {
+    this.router.navigate([`user/${id}/edit`]);
   }
 
   onMakeActive() {
