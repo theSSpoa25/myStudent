@@ -52,7 +52,9 @@
             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                 <div class="actions">
                     <button type="button" (click)="editUser(row.id)" class="btn btn-sm btn-success mx-2"> <fa-icon [icon]="faUserEdit"></fa-icon></button>
-                    <button type="button" (click)="deleteUser(row.id)" class="btn btn-sm btn-danger"> <fa-icon [icon]="faTrash"></fa-icon></button>
+                    <button type="button" (click)="onDeleteUser(row.id)" class="btn btn-sm btn-danger" *ngIf="row.active"> <fa-icon [icon]="faTrash"></fa-icon></button>
+                    <button type="button" (click)="onActivateUser(row.id)" class="btn btn-sm btn-primary" *ngIf="!row.active"> <fa-icon [icon]="faPlusCircle"></fa-icon></button>
+
                 </div>
             </ng-template>
         </ngx-datatable-column>

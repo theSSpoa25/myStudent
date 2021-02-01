@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,6 +68,34 @@ public class UserServiceImpl implements  IUserService{
             userRepository.save(user);
             return true;
         }
+        return false;
+    }
+
+    @Override
+    public Boolean activateUser(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setActive(true);
+            userRepository.save(user);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public Boolean deactivateUser(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setActive(null);
+            userRepository.save(user);
+            return true;
+        }
+
         return false;
     }
 }

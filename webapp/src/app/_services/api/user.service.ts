@@ -72,4 +72,24 @@ export class UserService {
       observe: 'body'
     })
   }
+
+  public activateUser(id: number): Observable<any> {
+    return this.http.put<any>(`${environment.apiEndpoint}/user/activate/${id}`, {}, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${this.token}`,
+      },
+      observe: 'body'
+    })
+  }
+
+  public deactivate(id: number): Observable<any> {
+    return this.http.put<any>(`${environment.apiEndpoint}/user/deactivate/${id}`, {}, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${this.token}`,
+      },
+      observe: 'body'
+    })
+  }
 }

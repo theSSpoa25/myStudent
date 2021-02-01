@@ -19,6 +19,8 @@
                 <div class="col">
                     <app-users-presentation *ngIf="allUsers$ | async as users" [users]="users"
                     (onEditUser)="editUser($event)"
+                    (deleteUser)="onDeleteUser($event)"
+                    (activateUser)="onActivateUser($event)"
                     [selected]="selected"
                 ></app-users-presentation>
                 </div>

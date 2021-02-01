@@ -14,4 +14,6 @@ public interface IUserService {
     Long createUser(CreateUserRequest createUser);
     List<User> searchUser(Specification<User> userSpecification, HttpHeaders httpHeaders);
     Boolean updateUser(UpdateUserRequest updateUser, Long id);
+    Boolean activateUser(Long id);
+    Boolean deactivateUser(Long id);
 }

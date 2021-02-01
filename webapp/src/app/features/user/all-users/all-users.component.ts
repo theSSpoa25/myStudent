@@ -9,6 +9,7 @@ import { UserService } from 'src/app/_services/api/user.service';
 import { UserFilterComponent } from 'src/app/_shared/modals/user-filter/user-filter.component';
 import omitBy from 'lodash/omitBy';
 import isEmpty from 'lodash/isEmpty';
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-all-users',
   templateUrl: './all-users.component.html',
@@ -111,5 +112,29 @@ export class AllUsersComponent implements OnInit {
 
   private getFilledFields(fg: FormGroup) {
     return omitBy(fg.value, (value) => {console.log('value', value); return !value || value.length === 0})
+  }
+
+  public onDeleteUser(id: number) {
+    if (id) {
+      this.userService.deactivate(id).pipe(
+        take(1),
+      ).subscribe(
+        res => {
+          console.log(res)
+        }
+      )
+    }
+  }
+
+  public onActivateUser(id: number) {
+    if (id) {
+      this.userService.activateUser(id).pipe(
+        take(1)
+      ).subscribe(
+        res => {
+          console.log(res)
+        }
+      )
+    }
   }
 }

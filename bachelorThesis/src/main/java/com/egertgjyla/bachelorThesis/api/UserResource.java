@@ -78,4 +78,16 @@ public class UserResource {
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @PutMapping(path = "/activate/{id}")
+    public  ResponseEntity<?> activateUser(@PathVariable(name =  "id", required = true) Long id) {
+        Boolean activated = userService.activateUser(id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/deactivate/{id}")
+    public  ResponseEntity<?> deactivateUser(@PathVariable(name =  "id", required = true) Long id) {
+        Boolean deactivatted = userService.deactivateUser(id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 }

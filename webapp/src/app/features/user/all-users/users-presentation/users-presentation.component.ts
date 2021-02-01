@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { faEye, faTrash, faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faTrash, faUserEdit, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { User } from 'src/app/_models/user/User';
 
@@ -14,10 +14,13 @@ export class UsersPresentationComponent implements OnInit {
   @Input() users!: User[] | null;
   @Input() selected: any[] = [];
   @Output() onEditUser: EventEmitter<number> = new EventEmitter<number>();
+  @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
+  @Output() activateUser: EventEmitter<number> = new EventEmitter<number>();
+
 
   loadingIndicator = true;
   reorderable = true;
-  
+
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
   columns = [
@@ -29,6 +32,7 @@ export class UsersPresentationComponent implements OnInit {
 
   faTrash = faTrash;
   faUserEdit = faUserEdit;
+  faPlusCircle = faPlusCircle;
   faEye = faEye;
 
   constructor() { }
@@ -51,8 +55,11 @@ export class UsersPresentationComponent implements OnInit {
     this.onEditUser.emit(id);
   }
 
-  deleteUser(value: any) {
-    console.log(value)
+  onDeleteUser(value: number) {
+    this.deleteUser.emit(value);
+  }
 
+  onActivateUser(value: number) {
+    this.activateUser.emit(value);
   }
 }
