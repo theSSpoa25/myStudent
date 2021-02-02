@@ -44,4 +44,18 @@ export class UserViewComponent implements OnInit {
     )
   }
 
+  onUploadProfilePicture(upload: any) {
+    console.log(upload)
+    if (upload) {
+      const formData = upload.formData;
+      const id = upload.id;
+
+      this.userService.uploadProfilePicture(id, formData).pipe(
+        take(1)
+      ).subscribe(
+        res => console.log(res)
+      )
+    }
+  }
+
 }

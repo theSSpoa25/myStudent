@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UserService } from 'src/app/_services/api/user.service';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/_models/user/User';
 @Component({
@@ -9,17 +10,22 @@ import { User } from 'src/app/_models/user/User';
 })
 export class UserPresentationComponent implements OnInit {
 
-  @Input()  user!: User | null; 
+  @Input()  user!: User | null;
   @Output() testEvent = new EventEmitter<any>();
+  @Output() uploadProfilePicture = new EventEmitter<any>();
 
   public roles = [
     'ADMIN',
     'USER'
   ];
   userForm!: FormGroup;
+  uploadForm: FormGroup = this.fb.group({
+    profile: ['']
+  })
 
   constructor(
     private fb: FormBuilder,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +52,33 @@ export class UserPresentationComponent implements OnInit {
     const roles = this.user?.roles as any[];
 
     return roles.map(role => role.role) as any[];
+  }
+
+  onFileChange(event: any) {
+    let reader = new FileReader();
+
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.uploadForm.get('profile')?.patchValue({
+          file: reader.result
+        });
+
+        // need to run CD since file load runs outside of zone
+        this.cd.markForCheck();
+      };
+    }
+  }
+  uploadProfilePicutre() {
+    const formData = new FormData();
+    formData.append('file', this.uploadForm.get('profile')?.value);
+
+    this.uploadProfilePicture.emit({
+      id: this.user?.id,
+      formData: formData
+    })
   }
 
 }

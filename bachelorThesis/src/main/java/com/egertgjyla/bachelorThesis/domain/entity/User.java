@@ -33,6 +33,18 @@ public class User {
     @Email
     private String email;
 
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "picture_id")
+    private Picture picture;
+
     public String getName() {
         return name;
     }

@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
@@ -7,7 +8,6 @@ import { map } from 'rxjs/operators';
 import { UserState } from 'src/app/store/reducers/user.reducer';
 import { getUser } from 'src/app/store/selectors/user.selectors';
 import { User } from 'src/app/_models/user/User';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -91,5 +91,18 @@ export class UserService {
       },
       observe: 'body'
     })
+  }
+
+  public uploadProfilePicture(id: number, file: FormData) {
+    return this.http.post(`${environment.apiEndpoint}/profile/upload/${id}`,
+    file,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${this.token}`,
+      },
+      observe: 'body'
+    }
+    )
   }
 }

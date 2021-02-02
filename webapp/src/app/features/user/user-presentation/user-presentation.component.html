@@ -13,6 +13,15 @@
                           </div>
                           <span class="text-primary mx-2">Change profile picture</span>
                           <span class="text-danger">Remove</span>
+
+                          <form [formGroup]="uploadForm">
+                            <div>
+                              <input type="file" formControlName="profile" (change)="onFileChange($event)" />
+                            </div>
+                            <div>
+                              <button type="button" (click)="uploadProfilePicutre()">Upload</button>
+                            </div>
+                          </form>
                         </div>
                     </div>
                 </div>
@@ -55,7 +64,7 @@
                               </ng-select>
                           </div>
                           </div>
-                          
+
                           <div class="form-group">
                             <label for="inputAddress">Address</label>
                             <input type="text" class="form-control" placeholder="Address" formControlName="address">
@@ -64,8 +73,8 @@
                             <label for="inputAddress">Email</label>
                             <input type="email" class="form-control" placeholder="Email" formControlName="email">
                           </div>
-                          
-                          <button type="submit" class="btn btn-primary" (click)="saveChanges()">Save Change</button>
+
+                          <button type="button" class="btn btn-primary" (click)="saveChanges()">Save Change</button>
                           <button type="button" class="btn btn-primary ml-2" [ngClass]="{'btn-danger': user.active}">{{user?.active ? 'Deactivate' : 'Activate'}} User</button>
                         </form>
                 </div>
