@@ -98,7 +98,6 @@ export class UserService {
     file,
     {
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `${this.token}`,
       },
       observe: 'body'

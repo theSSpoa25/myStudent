@@ -35,9 +35,10 @@ public class PictureServiceImpl implements IPictureService {
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            Picture picture = new Picture(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
+            Picture picture = new Picture(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()), user);
 
             user.setPicture(picture);
+            picture.setUser(user);
             userRepository.save(user);
         }
     }

@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -14,7 +15,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,6 +34,11 @@ public class User {
     @Email
     private String email;
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Picture picture;
+
     public Picture getPicture() {
         return picture;
     }
@@ -40,10 +46,6 @@ public class User {
     public void setPicture(Picture picture) {
         this.picture = picture;
     }
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "picture_id")
-    private Picture picture;
 
     public String getName() {
         return name;
@@ -102,6 +104,7 @@ public class User {
         this.address = address;
         this.name = name;
         this.surname = surname;
+        this.active = true;
     }
 
     public Long getId() {

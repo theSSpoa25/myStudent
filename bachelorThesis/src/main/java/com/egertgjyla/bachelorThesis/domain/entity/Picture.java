@@ -5,13 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 
 @Entity(name = "picture")
 @Data
-public class Picture {
+public class Picture implements Serializable {
     @Id
+    @Column(name = "user_id")
     private Long id;
 
     @Nullable
@@ -31,13 +33,18 @@ public class Picture {
     @Lob
     private byte[] data;
 
-    @OneToOne(mappedBy = "picture", cascade =  CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId
+    @JoinColumn(name = "user_id")
     private User user;
 
-    public Picture(String path, String type, byte[] data) {
+
+    public Picture() {};
+
+    public Picture(String path, String type, byte[] data, User user) {
         this.path = path;
         this.type = type;
         this.data = data;
+        this.user = user;
     }
 }

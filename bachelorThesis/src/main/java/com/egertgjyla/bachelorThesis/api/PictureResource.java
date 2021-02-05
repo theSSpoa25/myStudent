@@ -4,6 +4,7 @@ import com.egertgjyla.bachelorThesis.domain.dto.picture.ChangePictureDto;
 import com.egertgjyla.bachelorThesis.service.picture.IPictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,8 +18,8 @@ public class PictureResource {
     @Autowired
     IPictureService pictureService;
 
-    @PostMapping("/upload/{id}")
-    public ResponseEntity<?> uploadProfilePicture(@PathVariable(name = "id", required = true) Long id, @RequestBody MultipartFile file) {
+    @PostMapping(value = "/upload/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> uploadProfilePicture(@PathVariable(name = "id", required = true) Long id, @RequestParam MultipartFile file) {
         try {
             pictureService.uploadProfilePicture(file, id);
         } catch (IOException ioException) {

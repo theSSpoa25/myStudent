@@ -32,10 +32,10 @@ public class UserServiceImpl implements  IUserService{
         User user = new User(
                 userCreate.getUsername(),
                 userCreate.getEmail(),
+                passwordEncoder.encode(userCreate.getPassword()),
                 userCreate.getAddress(),
                 userCreate.getName(),
-                userCreate.getSurname(),
-                passwordEncoder.encode(userCreate.getPassword())
+                userCreate.getSurname()
         );
 
         for (String role : userCreate.getRoles()) {
