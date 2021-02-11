@@ -1,3 +1,4 @@
+import { ProfilePicture } from './../../../_models/user/profile-picture';
 import { UserService } from 'src/app/_services/api/user.service';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,6 +13,7 @@ import { FileUploader } from 'ng2-file-upload';
 export class UserPresentationComponent implements OnInit {
 
   @Input()  user!: User | null;
+  @Input() profilePicture!: ProfilePicture | null;
   @Output() testEvent = new EventEmitter<any>();
   @Output() uploadProfilePicture = new EventEmitter<any>();
   @ViewChild('fileInput') fileInput!: ElementRef;
@@ -20,6 +22,7 @@ export class UserPresentationComponent implements OnInit {
   public hasBaseDropZoneOver = false;
   public fileName!: string;
   public envelopeId!: number;
+  public isUploaderVisible: boolean = false;
 
   public roles = [
     'ADMIN',
@@ -80,7 +83,7 @@ export class UserPresentationComponent implements OnInit {
       };
     }
   }
-  
+
   uploadProfilePicutre() {
     if (this.uploader.queue.length > 0) {
       const formData = new FormData();
@@ -88,7 +91,8 @@ export class UserPresentationComponent implements OnInit {
       this.uploadProfilePicture.emit({
         id: this.user?.id,
         formData: formData
-      })
+      });
+      this.toggleUploader();
     }
 
   }
@@ -113,6 +117,10 @@ export class UserPresentationComponent implements OnInit {
 
   public fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
+  }
+
+  public toggleUploader() {
+    this.isUploaderVisible = !this.isUploaderVisible;
   }
 
 

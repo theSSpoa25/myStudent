@@ -5,28 +5,24 @@
                 <div class="card-body">
                     <div class="profile-picture-content d-flex align-items-center">
                         <div class="profile-picture">
-                          <img src="assets/images/portraits/sailor.jpg">
+                          <span *ngIf="profilePicture && profilePicture.data" [innerHTML]="profilePicture | toImage"></span>
                         </div>
                         <div class="content-details">
                           <div class="username">
                             <span class="ml-2"><strong>{{user?.name}} {{user?.surname}}</strong></span>
                           </div>
-                          <span class="text-primary mx-2">Change profile picture</span>
+                          <span class="text-primary mx-2" (click)="toggleUploader()">Change profile picture</span>
                           <span class="text-danger">Remove</span>
 
-                          <div class="file-upload-container">
+                          <div class="file-upload-container" *ngIf="isUploaderVisible">
                             <div id="fileUploadDiv" class="file-upload-handler">
                               <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
                                 [uploader]="uploader" (onFileDrop)="onFileSelected()" class="my-drop-zone" (click)="fileInput.click()">
-                          
-                                <span *ngIf="uploader?.queue?.length && !hasBaseDropZoneOver">
-                                  {{ fileName }}
-                                </span>
-                          
+
                                 <span *ngIf="hasBaseDropZoneOver && !uploader?.queue?.length">
                                   Upload Your file here
                                 </span>
-                          
+
                                 <input  type="file" #fileInput ng2FileSelect
                                   (onFileSelected)="onFileSelected()" [uploader]="uploader" style="display: none" />
                               </div>
@@ -37,14 +33,10 @@
                                 <button type="button" class="lion-button lion-button-text ml-2"
                                   (click)="uploadProfilePicutre()"
                                   [ngClass]="{'lion-button-mandatory ': this.uploader.queue.length, 'lion-button-inactive':!this.uploader.queue.length}">Upload</button>
-                                <button type="button" class="lion-button lion-button-text ml-2"
-                                  *ngIf="uploader.queue.length" (click)="initializeFileUploader()"
-                                  [ngClass]="{'lion-button-inactive':!this.uploader.queue.length}">
-                                  <img src="assets/images/icons/delete.png" alt=""></button>
                               </div>
                             </div>
                           </div>
-                          
+
                         </div>
                     </div>
                 </div>

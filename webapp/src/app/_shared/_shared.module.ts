@@ -7,12 +7,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserFilterComponent } from './modals/user-filter/user-filter.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToImagePipe } from './_pipes/to-image.pipe';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     DashboardComponent,
-    UserFilterComponent
+    UserFilterComponent,
+    ToImagePipe
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     HeaderComponent,
     DashboardComponent,
-    UserFilterComponent
+    UserFilterComponent,
+    ToImagePipe
   ],
   entryComponents: [UserFilterComponent]
 })

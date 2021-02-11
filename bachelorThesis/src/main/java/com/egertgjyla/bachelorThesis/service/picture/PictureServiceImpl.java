@@ -1,5 +1,6 @@
 package com.egertgjyla.bachelorThesis.service.picture;
 
+import com.egertgjyla.bachelorThesis.domain.dto.picture.ProfilePicture;
 import com.egertgjyla.bachelorThesis.domain.entity.Picture;
 import com.egertgjyla.bachelorThesis.domain.entity.User;
 import com.egertgjyla.bachelorThesis.repository.PictureRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.plaf.basic.BasicDesktopIconUI;
 import javax.transaction.Transactional;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -35,12 +37,39 @@ public class PictureServiceImpl implements IPictureService {
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            Picture picture = new Picture(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()), user);
+            Picture picture = user.getPicture();
+            if( picture == null) {
+                Picture newPicture = new Picture(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()), user);
+                user.setPicture(newPicture);
+                newPicture.setUser(user);
+            } else {
+                picture.setPath(file.getOriginalFilename());
+                picture.setType(file.getContentType());
+                picture.setData(compressBytes(file.getBytes()));
 
-            user.setPicture(picture);
-            picture.setUser(user);
+                user.setPicture(picture);
+                picture.setUser(user);
+            }
+
             userRepository.save(user);
         }
+    }
+
+    @Override
+    public ProfilePicture getProfilePicture(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()) {
+            Picture picture = optionalUser.get().getPicture();
+
+            return new ProfilePicture(
+                    picture.getPath(),
+                    picture.getType(),
+                    decompressBytes(picture.getData())
+            );
+        }
+
+        return null;
     }
 
     private static byte[] compressBytes(byte[] data) {

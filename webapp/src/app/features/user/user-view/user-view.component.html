@@ -1,1 +1,6 @@
-<app-user-presentation *ngIf="user$ | async as user" [user]="user" (testEvent)="onUserUpdate($event)" (uploadProfilePicture)="onUploadProfilePicture($event)"></app-user-presentation>
+<app-user-presentation *ngIf="user$ | async as user"
+    [user]="user"
+    [profilePicture]="userProfile$ | async"
+    (testEvent)="onUserUpdate($event)"
+    (uploadProfilePicture)="onUploadProfilePicture($event)">
+</app-user-presentation>

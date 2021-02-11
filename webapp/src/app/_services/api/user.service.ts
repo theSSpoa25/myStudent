@@ -1,13 +1,13 @@
-import { environment } from './../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { String } from 'lodash';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserState } from 'src/app/store/reducers/user.reducer';
 import { getUser } from 'src/app/store/selectors/user.selectors';
+import { ProfilePicture } from 'src/app/_models/user/profile-picture';
 import { User } from 'src/app/_models/user/User';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -103,5 +103,15 @@ export class UserService {
       observe: 'body'
     }
     )
+  }
+
+  public getProfilePicture(id: number): Observable<ProfilePicture> {
+    return this.http.get<ProfilePicture>(`${environment.apiEndpoint}/profile/${id}`, {
+      headers: {
+        'Authorization': `${this.token}`,
+        'Content-Type': 'application/json'
+      },
+      observe: 'body'
+    })
   }
 }

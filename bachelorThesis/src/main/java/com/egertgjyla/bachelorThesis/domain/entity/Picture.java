@@ -3,6 +3,7 @@ package com.egertgjyla.bachelorThesis.domain.entity;
 import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.sql.Date;
 
 @Entity(name = "picture")
 @Data
+@Getter
 public class Picture implements Serializable {
     @Id
     @Column(name = "user_id")

@@ -1,8 +1,11 @@
 package com.egertgjyla.bachelorThesis.api;
 
 import com.egertgjyla.bachelorThesis.domain.dto.picture.ChangePictureDto;
+import com.egertgjyla.bachelorThesis.domain.dto.picture.ProfilePicture;
+import com.egertgjyla.bachelorThesis.domain.entity.Picture;
 import com.egertgjyla.bachelorThesis.service.picture.IPictureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,17 @@ public class PictureResource {
         } catch (IOException ioException) {
 
         }
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping( value = "/{id}")
+    public ResponseEntity<?> getProfilePicture(@PathVariable(name = "id", required = true) Long id) {
+        ProfilePicture profilePicture = pictureService.getProfilePicture(id);
+
+        if (profilePicture != null) {
+            return ResponseEntity.ok(profilePicture);
+        }
+
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
