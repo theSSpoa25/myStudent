@@ -10,7 +10,8 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 
-@Entity(name = "picture")
+@Entity()
+@Table(name = "pictures")
 @Data
 @Getter
 public class Picture implements Serializable {

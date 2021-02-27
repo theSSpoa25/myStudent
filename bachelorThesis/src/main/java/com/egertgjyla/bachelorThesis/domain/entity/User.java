@@ -3,6 +3,7 @@ package com.egertgjyla.bachelorThesis.domain.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
+@Data
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -91,8 +93,15 @@ public class User implements Serializable {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
     @Column(columnDefinition = "boolean default true")
     private Boolean active;
+
+    @OneToMany(mappedBy = "owner")
+    private Set<Ticket> ownerTickets = new HashSet<>();
+
+    @OneToMany(mappedBy = "assignedTo")
+    private Set<Ticket> assignedToTickets = new HashSet<>();
 
     public User() {
     }

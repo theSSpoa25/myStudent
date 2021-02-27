@@ -37,6 +37,14 @@ public class Ticket implements Serializable {
     @JoinColumn(name = "assigned_user_id")
     private User assignedTo;
 
+    @OneToOne(targetEntity = Priority.class, cascade = CascadeType.ALL ,fetch=FetchType.LAZY)
+    @JoinColumn(name="priority_id")
+    private Priority priority;
+
+    @OneToOne(targetEntity = Status.class, cascade = CascadeType.ALL ,fetch=FetchType.LAZY)
+    @JoinColumn(name="status_id")
+    private Status status;
+
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
