@@ -90,4 +90,10 @@ public class UserResource {
         Boolean deactivatted = userService.deactivateUser(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @GetMapping("/search/{term}")
+    public ResponseEntity<?> searchUserByNameOrSurnameOrRole(@PathVariable(name = "term", required = false) String term) {
+        List<User> users = userService.searchUsersByNameOrSurnameOrRole(term);
+        return ResponseEntity.ok(users);
+    }
 }

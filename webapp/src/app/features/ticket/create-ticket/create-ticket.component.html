@@ -1,0 +1,88 @@
+<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-7">
+        <p-panel header="Ticket Details" [toggleable]="false">
+            <div class="form-group">
+              <label>Ticket Title</label>
+              <input type="text" class="form-control form-control-md" formControlName="title"/>
+            </div>
+
+            <div class="form-group">
+              <label>Type</label>
+              <ng-select
+                [items]="types$ | async"
+                [multiple]="false"
+                [closeOnSelect]="true"
+                [searchable]="true"
+                placeholder="Select ticket type"
+                formControlName="type"
+                bindLabel="type"
+              >
+              </ng-select>
+            </div>
+
+            <div class="form-group">
+              <label for="">Summary</label>
+              <p-editor
+                formControlName="description"
+                [style]="{ height: '320px' }"
+              ></p-editor>
+            </div>
+        </p-panel>
+      </div>
+      <div class="col-md-5">
+        <p-panel header="Ticket Assignment">
+          <div class="form-group row">
+            <label for="reporter" class="col-sm-3 col-form-label">Reporter</label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                readonly
+                class="form-control form-control-md"
+
+                [value]="user ? user.name + ' ' + user.surname : 'No Reporter'"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="assigne" class="col-sm-3 col-form-label">Assigne</label>
+            <div class="col-sm-9">
+              <ng-select
+                [items]="users$ | async"
+                bindLabel="name"
+                [multiple]="false"
+                [hideSelected]="false"
+                [trackByFn]="trackByFn"
+                [closeOnSelect]="true"
+                [minTermLength]="2"
+                [loading]="userLoading"
+                typeToSearchText="Please enter 2 or more characters"
+                [typeahead]="userInput$"
+                formControlName="assignee"
+                [virtualScroll]="true"
+
+              >
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="duedate" class="col-sm-3 col-form-label">Due Date</label>
+            <div class="col-sm-9">
+              <p-calendar
+                formControlName="dueDate"
+                [showIcon]="true"
+                inputId="icon"
+              ></p-calendar>
+            </div>
+          </div>
+        </p-panel>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-md btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>

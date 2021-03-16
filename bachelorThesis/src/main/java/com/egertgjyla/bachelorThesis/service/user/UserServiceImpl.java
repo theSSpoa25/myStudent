@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,9 +34,9 @@ public class UserServiceImpl implements  IUserService{
                 userCreate.getUsername(),
                 userCreate.getEmail(),
                 passwordEncoder.encode(userCreate.getPassword()),
-                userCreate.getAddress(),
                 userCreate.getName(),
-                userCreate.getSurname()
+                userCreate.getSurname(),
+                userCreate.getAddress()
         );
 
         for (String role : userCreate.getRoles()) {
@@ -97,5 +98,11 @@ public class UserServiceImpl implements  IUserService{
         }
 
         return false;
+    }
+
+    @Override
+    @Transactional
+    public List<User> searchUsersByNameOrSurnameOrRole(String term) {
+        return userRepository.findUsersByNameOrUsernameOrRole(term);
     }
 }

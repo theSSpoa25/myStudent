@@ -16,4 +16,5 @@ public interface IUserService {
     Boolean updateUser(UpdateUserRequest updateUser, Long id);
     Boolean activateUser(Long id);
     Boolean deactivateUser(Long id);
+    List<User> searchUsersByNameOrSurnameOrRole(String term);
 }

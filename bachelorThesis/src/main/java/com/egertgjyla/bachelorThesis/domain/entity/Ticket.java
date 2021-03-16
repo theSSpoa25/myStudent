@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -26,7 +27,7 @@ public class Ticket implements Serializable {
     @Size(min = 3, max = 5)
     private String title;
 
-    @Column(length = 1000)
+    @Lob
     private String description;
 
     @ManyToOne
@@ -45,11 +46,24 @@ public class Ticket implements Serializable {
     @JoinColumn(name="status_id")
     private Status status;
 
+    @OneToOne(targetEntity = Type.class, cascade = CascadeType.ALL ,fetch=FetchType.LAZY)
+    @JoinColumn(name="type_id")
+    private Type type;
+
+    @Column(name = "due_date", nullable = true, updatable = true)
+    private Date dueDate;
+
     @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = true, updatable = false)
     private Date createdAt;
 
     @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public Ticket(@Size(min = 3, max = 5) String title, String description, Date dueDate) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+    }
 }

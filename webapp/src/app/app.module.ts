@@ -53,7 +53,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         preventDuplicates: true,
       }
     ), // ToastrModule added
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     {

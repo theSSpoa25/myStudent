@@ -10,7 +10,11 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {
     path: 'user',
-    loadChildren: () => import('./features/user/user.module').then(m => m.UserModule)  
+    loadChildren: () => import('./features/user/user.module').then(m => m.UserModule)
+  },
+  {
+    path: 'ticket',
+    loadChildren: () => import(`./features/ticket/ticket.module`).then(m => m.TicketModule)
   }
 
 ];

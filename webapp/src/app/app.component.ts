@@ -14,22 +14,21 @@ export class AppComponent implements OnInit {
   title = 'webapp';
   public user$: any;
   public userIsLogged = false;
-  
+
   constructor(
     private store: Store<IAppState>
   ) {
   }
 
+  // tslint:disable-next-line:typedef
   ngOnInit() {
     this.user$ = this.store.pipe(select(getUser)).pipe(
       switchMap( user => {
         if (user.token) {
           this.userIsLogged = true;
         }
-        return of(user)
+        return of(user);
       })
-    ).subscribe()
-
-    console.log(this.user$)
+    ).subscribe();
   }
 }

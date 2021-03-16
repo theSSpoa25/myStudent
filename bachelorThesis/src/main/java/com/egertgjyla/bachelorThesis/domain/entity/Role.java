@@ -1,6 +1,7 @@
 package com.egertgjyla.bachelorThesis.domain.entity;
 
 import com.sun.istack.NotNull;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;

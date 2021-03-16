@@ -114,4 +114,14 @@ export class UserService {
       observe: 'body'
     })
   }
+
+  public searchUsersByNameOrSurnameOrRole(term: string): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiEndpoint}/user/search/${term}`, {
+      headers: {
+        'Authorization': `${this.token}`,
+        'Content-Type': 'application/json'
+      },
+      observe: 'body'
+    })
+  }
 }

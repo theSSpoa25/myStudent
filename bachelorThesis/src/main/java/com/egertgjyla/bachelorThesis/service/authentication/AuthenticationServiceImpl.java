@@ -50,17 +50,17 @@ public class AuthenticationServiceImpl implements IAuthenticationService{
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-
-        return ResponseEntity.ok(new LoginResponse(
-                        jwt,
-                        userDetails.getId(),
-                        userDetails.getUsername(),
-                        userDetails.getEmail(),
-                        roles,
-                        userDetails.getName(),
-                        userDetails.getSurname(),
-                        userDetails.getAddress(),
-                        userDetails.getActive()
-                ));
+        LoginResponse loginResponse = new LoginResponse(
+                jwt,
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                roles,
+                userDetails.getName(),
+                userDetails.getSurname(),
+                userDetails.getAddress(),
+                userDetails.getActive()
+        );
+        return ResponseEntity.ok(loginResponse);
     }
 }

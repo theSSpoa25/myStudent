@@ -97,10 +97,12 @@ public class User implements Serializable {
     @Column(columnDefinition = "boolean default true")
     private Boolean active;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Ticket> ownerTickets = new HashSet<>();
 
-    @OneToMany(mappedBy = "assignedTo")
+    @OneToMany(mappedBy = "assignedTo", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Ticket> assignedToTickets = new HashSet<>();
 
     public User() {
@@ -110,9 +112,9 @@ public class User implements Serializable {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.address = address;
         this.name = name;
         this.surname = surname;
+        this.address = address;
         this.active = true;
     }
 
