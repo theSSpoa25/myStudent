@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
 import { concat, Observable, of, Subject } from 'rxjs';
 import {
   catchError,
@@ -45,7 +47,9 @@ export class CreateTicketComponent implements OnInit {
     private typeService: TypeService,
     private userService: UserService,
     private ticketService: TicketService,
-    private store: Store<UserState>
+    private store: Store<UserState>,
+    private toastr: ToastrService,
+    private router: Router
   ) {
     this.store
       .pipe(select(getUser))
@@ -93,8 +97,20 @@ export class CreateTicketComponent implements OnInit {
 
     const createForm: CreateTicket = new CreateTicket(this.createForm.value);
 
-    this.ticketService.createTicket(createForm).subscribe(
-      res => console.log(res)
+    this.ticketService.createTicket(createForm).pipe(
+      catchError(e => {
+        this.toastr.error('Error Creating ticket', 'Create ticket');
+        throw(e);
+      })
+    )
+    .subscribe(
+      res => {
+        this.toastr.success('Ticket is created', 'Create ticket');
+        this.router.navigate([`/ticket/${res}`]);
+      },
+      e => {
+        this.toastr.error('Error Creating ticket', 'Create ticket');
+      }
     );
   }
 }

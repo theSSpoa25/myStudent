@@ -1,0 +1,26 @@
+<div class="title">
+  Description
+</div>
+<ng-container *ngIf="isEditing; else readOnlyTempl">
+  <form [formGroup]="descriptionForm" [hidden]="!isEditing">
+    <p-editor
+      #editor
+      (onInit)="onEditorInit($event)"
+      formControlName="description"
+      [style]="{ height: '320px' }"
+      [appAutoFocus]="isEditing"
+    ></p-editor>
+
+    <div class="button-actions d-flex justify-content-end">
+        <button class="btn btn-sm btn-light" type="button" (click)="cancel()"><fa-icon [icon]="faTimes" [styles]="{'color': 'red'}"></fa-icon></button>
+        <button class="btn btn-sm btn-light" type="button" (click)="save()"><fa-icon [icon]="faCheck" [styles]="{'color': 'green'}"></fa-icon></button>
+    </div>
+  </form>
+</ng-container>
+
+<ng-template #readOnlyTempl>
+  <div class="read-only-description w-100" (click)="toggleEdit()">
+    <span [innerHtml]="descriptionForm.get('description').value | sanitizer">
+    </span>
+  </div>
+</ng-template>

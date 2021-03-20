@@ -1,0 +1,14 @@
+<div class="ticket-id d-flex align-items-center pb-2">
+  <fa-icon size="lg" [icon]="faTicketAlt"></fa-icon>
+  <span class="pl-2">{{type.type}}-{{id}}</span>
+</div>
+
+<ng-container *ngIf="isEditing; else readOnlyTempl">
+  <form [formGroup]="titleForm" [hidden]="!isEditing">
+    <textarea  pInputTextarea [autoResize]="true" formControlName="title" class="w-100" (blur)="onBlur()" [appAutoFocus]="isEditing" ></textarea>
+  </form>
+</ng-container>
+
+<ng-template #readOnlyTempl>
+  <p class="title" (click)="toggleEditMode()">{{this.titleForm.get('title').value}}</p>
+</ng-template>

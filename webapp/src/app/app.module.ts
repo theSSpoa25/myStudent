@@ -48,7 +48,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgxDatatableModule,
     ToastrModule.forRoot(
       {
-        positionClass: 'toast-top-center',
+        positionClass: 'toast-top-right',
         timeOut: 3000,
         preventDuplicates: true,
       }

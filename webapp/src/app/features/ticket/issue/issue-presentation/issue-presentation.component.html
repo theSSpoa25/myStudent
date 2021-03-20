@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <app-issue-title
+              [title]="ticket.title"
+              [id]="ticket.id"
+              [type]="ticket.type"
+            ></app-issue-title>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <app-issue-description
+              [description]="ticket.description"
+              [id]="ticket.id"
+            ></app-issue-description>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <p-tabView>
+              <p-tabPanel>
+                <ng-template pTemplate="header">
+                  <span class="tab-header">
+                    <fa-icon [icon]="faPaperClip"></fa-icon> Attachments
+                  </span>
+                </ng-template>
+                <ng-template pTemplate="content">
+                  <app-issue-attachement></app-issue-attachement>
+                </ng-template>
+              </p-tabPanel>
+              <p-tabPanel>
+                <ng-template pTemplate="header">
+                  <span class="tab-header">
+                    <fa-icon [icon]="faComments"></fa-icon> Comments
+                  </span>
+                </ng-template>
+                <ng-template pTemplate="content">
+                  <app-issue-comment></app-issue-comment>
+                </ng-template>
+              </p-tabPanel>
+            </p-tabView>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="wrapper px-4">
+
+              <div class="row">
+                <div class="col">
+                  <app-issue-status
+                    [id]="ticket.id"
+                    [status]="ticket.status"
+                  ></app-issue-status>
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col">
+                  <app-issue-owner [owner]="ticket.owner"></app-issue-owner>
+                </div>
+              </div>
+
+
+              <div class="row mt-4">
+                <div class="col">
+                  <app-issue-assign [assignee]="ticket.assignedTo" [id]="ticket.id"></app-issue-assign>
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col">
+                  <div class="d-flex align-items-center mb-1"><span class="section-title mr-1">Created At:</span> <span class="date">{{ticket.createdAt | dateFormat: 'DD-MM-YYYY HH:MM:SS'}}</span></div>
+                  <div class="d-flex align-items-center"><span class="section-title mr-1">Updated At:</span> <span class="date">{{ticket.updatedAt | dateFormat: 'DD-MM-YYYY HH:MM:SS'}}</span></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

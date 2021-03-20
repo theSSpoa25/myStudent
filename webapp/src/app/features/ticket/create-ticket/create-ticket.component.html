@@ -2,20 +2,20 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-7">
-        <p-panel header="Ticket Details" [toggleable]="false">
+        <p-panel header="Detajet e kerkeses" [toggleable]="false">
             <div class="form-group">
-              <label>Ticket Title</label>
+              <label>Titulli i kerkeses</label>
               <input type="text" class="form-control form-control-md" formControlName="title"/>
             </div>
 
             <div class="form-group">
-              <label>Type</label>
+              <label>Tipi</label>
               <ng-select
                 [items]="types$ | async"
                 [multiple]="false"
                 [closeOnSelect]="true"
                 [searchable]="true"
-                placeholder="Select ticket type"
+                placeholder="Zgjidh tipin e kerkeses"
                 formControlName="type"
                 bindLabel="type"
               >
@@ -23,7 +23,7 @@
             </div>
 
             <div class="form-group">
-              <label for="">Summary</label>
+              <label for="">Pershkrimi</label>
               <p-editor
                 formControlName="description"
                 [style]="{ height: '320px' }"
@@ -32,7 +32,7 @@
         </p-panel>
       </div>
       <div class="col-md-5">
-        <p-panel header="Ticket Assignment">
+        <p-panel header="Caktimi i kerkeses">
           <div class="form-group row">
             <label for="reporter" class="col-sm-3 col-form-label">Reporter</label>
             <div class="col-sm-9">
@@ -67,7 +67,7 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="duedate" class="col-sm-3 col-form-label">Due Date</label>
+            <label for="duedate" class="col-sm-3 col-form-label">Data e perfundimit</label>
             <div class="col-sm-9">
               <p-calendar
                 formControlName="dueDate"
@@ -81,7 +81,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <button type="submit" class="btn btn-md btn-primary">Submit</button>
+        <button type="submit" class="btn btn-md btn-primary">Krijo</button>
       </div>
     </div>
   </div>

@@ -1,0 +1,30 @@
+<div class="section-title mb-2">Assignee</div>
+
+<p-chip [label]="assignee.name + ' ' + assignee.surname" styleClass="p-mr-2" (click)="op.toggle($event)"></p-chip>
+
+<p-overlayPanel #op [showCloseIcon]="true" [style]="{width: '450px'}" appendTo="body" [baseZIndex]="999">
+  <ng-template pTemplate>
+    <div class="form-group row">
+      <label for="assigne" class="col-sm-3 col-form-label">Assigne</label>
+      <div class="col-sm-9">
+        <ng-select
+          [items]="users$ | async"
+          bindLabel="name"
+          [multiple]="false"
+          [hideSelected]="false"
+          [trackByFn]="trackByFn"
+          [closeOnSelect]="true"
+          [minTermLength]="2"
+          [loading]="userLoading"
+          typeToSearchText="Please enter 2 or more characters"
+          [typeahead]="userInput$"
+          [(ngModel)]="selectedUser"
+          (change)="onChange($event, op)"
+          [virtualScroll]="true"
+
+        >
+        </ng-select>
+      </div>
+    </div>
+  </ng-template>
+</p-overlayPanel>

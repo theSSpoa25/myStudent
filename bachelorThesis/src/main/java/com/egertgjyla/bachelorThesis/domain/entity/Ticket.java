@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -18,13 +19,13 @@ import java.util.Date;
 @Data
 @NoArgsConstructor()
 @AllArgsConstructor()
+@EnableJpaAuditing()
 public class Ticket implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 300)
-    @Size(min = 3, max = 5)
     private String title;
 
     @Lob
@@ -59,9 +60,9 @@ public class Ticket implements Serializable {
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 
-    public Ticket(@Size(min = 3, max = 5) String title, String description, Date dueDate) {
+    public Ticket(String title, String description, Date dueDate) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;

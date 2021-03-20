@@ -1,0 +1,5 @@
+<div class="section-title mb-2">Status</div>
+
+<p-chip [label]="status.statusTitle" styleClass="p-mr-2" (click)="menu.toggle($event)"></p-chip>
+
+<p-menu #menu [popup]="true" [baseZIndex]="9999" appendTo="body"	 [model]="menuItems"></p-menu>
