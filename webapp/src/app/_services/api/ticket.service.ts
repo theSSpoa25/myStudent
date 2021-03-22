@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tick } from '@angular/core/testing';
 import { Store, select } from '@ngrx/store';
+import { env } from 'process';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserState } from 'src/app/store/reducers/user.reducer';
 import { getUser } from 'src/app/store/selectors/user.selectors';
+import { Attachment } from 'src/app/_models/attachment/attachment';
 import { CreateTicket } from 'src/app/_models/ticket/create-ticket';
 import { Status } from 'src/app/_models/ticket/stauts';
 import { Ticket } from 'src/app/_models/ticket/ticket';
@@ -86,5 +89,35 @@ export class TicketService {
         'Authorization': `${this.token}`,
       }
     });
+  }
+
+  public uploadAttachment(userId: number, ticketId: number, file: FormData) {
+    return this.http.post(`${environment.apiEndpoint}/attachment/upload/${userId}/${ticketId}`,
+    file,
+    {
+      headers: {
+        'Authorization': `${this.token}`,
+      },
+      observe: 'body'
+    }
+    )
+  }
+
+  public getAllAttachments(ticketId: number): Observable<Attachment[]> {
+    return this.http.get<Attachment[]>(`${environment.apiEndpoint}/attachment/all/${ticketId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${this.token}`,
+      }
+    })
+  }
+
+  public getAttachment(id: number): Observable<Attachment> {
+    return this.http.get<Attachment>(`${environment.apiEndpoint}/attachment/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${this.token}`,
+      }
+    })
   }
 }

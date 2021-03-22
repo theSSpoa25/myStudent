@@ -30,6 +30,7 @@
     "@swimlane/ngx-datatable": "^19.0.0",
     "@types/quill": "^2.0.5",
     "bootstrap": "^4.5.3",
+    "file-saver": "^2.0.5",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "ng2-file-upload": "^1.4.0",

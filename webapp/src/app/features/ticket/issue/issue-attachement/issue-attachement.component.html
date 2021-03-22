@@ -1,1 +1,29 @@
-<p>issue-attachement works!</p>
+<div
+  ng2FileDrop
+  [ngClass]="{ 'nv-file-over': hasBaseDropZoneOver }"
+  (fileOver)="fileOverBase($event)"
+  [uploader]="uploader"
+  (onFileDrop)="dropped($event)"
+  class="well my-drop-zone"
+>
+  <div class="attachment-wrapper">
+    <div class="attachment" *ngFor="let attachment of attachments" [title]="attachment.fileName" (click)="download(attachment.id)">
+      <div class="attachment-icon">
+        <div [ngSwitch]="attachment.fileType">
+          <div *ngSwitchCase="'application/pdf'">
+            <img src="assets/images/file-icon/pdf.png" class="file-icon">
+          </div>
+          <div *ngSwitchCase="'application/vnd.openxmlformats-officedocument.wordprocessingml.document'">
+            <img src="assets/images/file-icon/doc.png" class="file-icon">
+          </div>
+          <div *ngSwitchDefault>
+            <img src="assets/images/file-icon/document.png" class="file-icon">
+          </div>
+        </div>
+      </div>
+      <div class="attachment-name text-center">
+        {{attachment.fileName}}
+      </div>
+    </div>
+  </div>
+</div>

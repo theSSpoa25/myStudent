@@ -1,0 +1,30 @@
+.well {
+  height: 500px;
+  width: 100%;
+
+  .attachment-wrapper {
+    .attachment {
+      height: 125px;
+      float: left;
+      margin: 15px;
+      .attachment-icon {
+        width: 80px;
+      }
+      .file-icon {
+        width: 80px;
+      }
+      .attachment-name  {
+        width: 80px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #42526e;
+        font-size: .875rem;
+      }
+    }
+  }
+}
+
+.nv-file-over {
+  background: #ffe9a6;
+}

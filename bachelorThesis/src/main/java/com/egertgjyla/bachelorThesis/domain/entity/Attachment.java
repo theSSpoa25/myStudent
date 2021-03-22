@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -15,7 +16,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Attachment {
+public class Attachment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,11 +32,11 @@ public class Attachment {
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 
     @ManyToOne(targetEntity =  Ticket.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "ticet_id")
-    private Ticket ticketId;
+    private Ticket ticket;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -43,6 +44,20 @@ public class Attachment {
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
+
+    public Attachment(String path, String type, byte[] data, User user, Ticket ticket) {
+        this.fileName = path;
+        this.fileType = type;
+        this.data = data;
+        this.user = user;
+        this.ticket = ticket;
+    }
+
+    public Attachment(String path, String fileType, byte[] data) {
+        this.fileName = path;
+        this.fileType = fileType;
+        this.data = data;
+    }
 
 }

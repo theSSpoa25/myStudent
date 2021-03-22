@@ -28,6 +28,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {AvatarModule} from 'primeng/avatar';
 import { AllIssuesComponent } from './all-issues/all-issues.component';
 import {TableModule} from 'primeng/table';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [TicketComponent, CreateTicketComponent, IssueComponent, IssuePresentationComponent, IssueTitleComponent, IssueDescriptionComponent, IssueAttachementComponent, IssueCommentComponent, IssueStatusComponent, IssueAssignComponent, IssueOwnerComponent, AllIssuesComponent],
@@ -48,7 +49,8 @@ import {TableModule} from 'primeng/table';
     MenuModule,
     OverlayPanelModule,
     AvatarModule,
-    TableModule
+    TableModule,
+    FileUploadModule
   ]
 })
 export class TicketModule { }
