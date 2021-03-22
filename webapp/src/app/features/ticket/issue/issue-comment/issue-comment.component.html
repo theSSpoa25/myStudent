@@ -1,1 +1,24 @@
-<p>issue-comment works!</p>
+<div class="d-flex">
+  <p-avatar [label]="user.name.charAt(0)" shape="circle" class="mr-2"></p-avatar>
+  <div class="w-100">
+    <textarea  pInputTextarea [autoResize]="true" [(ngModel)]="comment" class="w-100" ></textarea>
+  </div>
+</div>
+<div class="d-flex w-100 justify-content-end">
+  <button type="button" (click)="onComment()" class="btn btn-primary btn-sm">Comment</button>
+</div>
+
+
+<div class="comment-wrapper">
+  <div class="comments mt-3" *ngFor="let comment of comments">
+    <div class="d-flex align-items-center" >
+      <p-avatar [label]="comment.user.name.charAt(0) + comment.user.surname.charAt(0)" shape="circle" class="mr-2" [title]="comment.user.name + ' ' + comment.user.surname"></p-avatar>
+      <span class="comment-detail ml-2">{{comment.user.name}} {{comment.user.surname}}</span>
+      <span class="comment-detail ml-2">{{comment.createdAt | dateFormat: 'DD-MM-YYYY HH:MM:SS'}}</span>
+    </div>
+    <div class="d-flex align-items-center">
+      <span class="comment">{{comment.comment}}</span>
+    </div>
+  </div>
+</div>
+

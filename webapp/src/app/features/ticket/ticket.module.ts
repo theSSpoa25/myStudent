@@ -25,6 +25,7 @@ import { IssueAssignComponent } from './issue/issue-assign/issue-assign.componen
 import { IssueOwnerComponent } from './issue/issue-owner/issue-owner.component';
 import { MenuModule } from 'primeng/menu';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {AvatarModule} from 'primeng/avatar';
 
 @NgModule({
   declarations: [TicketComponent, CreateTicketComponent, IssueComponent, IssuePresentationComponent, IssueTitleComponent, IssueDescriptionComponent, IssueAttachementComponent, IssueCommentComponent, IssueStatusComponent, IssueAssignComponent, IssueOwnerComponent],
@@ -43,7 +44,8 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     TabViewModule,
     ChipModule,
     MenuModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    AvatarModule
   ]
 })
 export class TicketModule { }

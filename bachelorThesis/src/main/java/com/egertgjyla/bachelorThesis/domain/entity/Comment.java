@@ -1,17 +1,17 @@
 package com.egertgjyla.bachelorThesis.domain.entity;
 
 import lombok.Data;
-import lombok.Generated;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "comments")
 @Data
+@NoArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Comment {
     private User userId;
 
     @ManyToOne(targetEntity =  Ticket.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticet_id")
+    @JoinColumn(name = "ticket_id")
     private Ticket ticket;
 
     @CreatedDate
@@ -35,5 +35,11 @@ public class Comment {
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
+
+    public Comment(String comment, User user, Ticket ticket) {
+        this.comment = comment;
+        this.userId = user;
+        this.ticket = ticket;
+    }
 }

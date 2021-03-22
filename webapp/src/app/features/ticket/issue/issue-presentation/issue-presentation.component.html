@@ -41,7 +41,7 @@
                   </span>
                 </ng-template>
                 <ng-template pTemplate="content">
-                  <app-issue-comment></app-issue-comment>
+                  <app-issue-comment [ticketId]="ticket.id"></app-issue-comment>
                 </ng-template>
               </p-tabPanel>
             </p-tabView>
