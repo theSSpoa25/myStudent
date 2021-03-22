@@ -5,7 +5,7 @@ import { Type } from "./type";
 export interface Ticket {
   id: number;
   type: Type;
-  description: string;
+  description?: string;
   dueDate: Date | string;
   title: string;
   status: Status;

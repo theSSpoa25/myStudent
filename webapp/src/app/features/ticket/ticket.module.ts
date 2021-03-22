@@ -26,9 +26,11 @@ import { IssueOwnerComponent } from './issue/issue-owner/issue-owner.component';
 import { MenuModule } from 'primeng/menu';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {AvatarModule} from 'primeng/avatar';
+import { AllIssuesComponent } from './all-issues/all-issues.component';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
-  declarations: [TicketComponent, CreateTicketComponent, IssueComponent, IssuePresentationComponent, IssueTitleComponent, IssueDescriptionComponent, IssueAttachementComponent, IssueCommentComponent, IssueStatusComponent, IssueAssignComponent, IssueOwnerComponent],
+  declarations: [TicketComponent, CreateTicketComponent, IssueComponent, IssuePresentationComponent, IssueTitleComponent, IssueDescriptionComponent, IssueAttachementComponent, IssueCommentComponent, IssueStatusComponent, IssueAssignComponent, IssueOwnerComponent, AllIssuesComponent],
   imports: [
     CommonModule,
     TicketRoutingModule,
@@ -45,7 +47,8 @@ import {AvatarModule} from 'primeng/avatar';
     ChipModule,
     MenuModule,
     OverlayPanelModule,
-    AvatarModule
+    AvatarModule,
+    TableModule
   ]
 })
 export class TicketModule { }

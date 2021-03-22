@@ -1,14 +1,14 @@
 package com.egertgjyla.bachelorThesis.api;
 
 import com.egertgjyla.bachelorThesis.domain.dto.ticket.*;
-import com.egertgjyla.bachelorThesis.domain.dto.user.CreateUserRequest;
 import com.egertgjyla.bachelorThesis.domain.pojo.StatusPojo;
 import com.egertgjyla.bachelorThesis.service.ticket.ITicketService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/ticket")
@@ -53,6 +53,10 @@ public class TicketResource {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-
+    @GetMapping(path = {"/all/user/{id}"})
+    public ResponseEntity<List<TicketDto>> getAllTickets(@PathVariable(name = "id", required = true) Long id) {
+        List<TicketDto> ticketDtoList = ticketService.getAllTickets(id);
+        return  ResponseEntity.ok(ticketDtoList);
+    }
 
 }

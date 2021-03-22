@@ -78,4 +78,13 @@ export class TicketService {
       },
     });
   }
+
+  public getAllTickets(userId: number): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(`${environment.apiEndpoint}/ticket/all/user/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${this.token}`,
+      }
+    });
+  }
 }

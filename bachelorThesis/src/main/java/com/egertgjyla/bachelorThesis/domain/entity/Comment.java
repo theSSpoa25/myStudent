@@ -17,8 +17,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
-    @Column(name = "comment")
+    @Column(name = "comment", columnDefinition = "clob")
     private String comment;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)

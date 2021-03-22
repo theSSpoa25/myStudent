@@ -1,0 +1,75 @@
+<div class="table-wrapper">
+  <p-table styleClass="p-datatable-sm"
+  [value]="tickets"
+  [paginator]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Duke treguar {first} deri ne {last} te {totalRecords} kerkesave"
+  [rowsPerPageOptions]="[10, 25, 50]"
+>
+<ng-template pTemplate="caption">
+  <div class="p-d-flex p-ai-center p-jc-between">
+      Kerkesat
+  </div>
+</ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="id">
+        Id
+        <p-sortIcon field="id"></p-sortIcon>
+        <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+      </th>
+      <th pSortableColumn="title">
+        Title <p-sortIcon field="title"></p-sortIcon>
+        <p-columnFilter
+          type="text"
+          field="title"
+          display="menu"
+        ></p-columnFilter>
+      </th>
+      <th pSortableColumn="status.statusTitle">
+        Status <p-sortIcon field="status.statusTitle"></p-sortIcon>
+        <p-columnFilter
+          type="text"
+          field="status.statusTitle"
+          display="menu"
+        ></p-columnFilter>
+      </th>
+      <th pSortableColumn="type.type">
+        Type <p-sortIcon field="type.type"></p-sortIcon>
+        <p-columnFilter
+          type="text"
+          field="type.type"
+          display="menu"
+        ></p-columnFilter>
+      </th>
+      <th pSortableColumn="owner.name">
+        Owner <p-sortIcon field="owner.name"></p-sortIcon>
+        <p-columnFilter
+          type="text"
+          field="type.type"
+          display="menu"
+        ></p-columnFilter>
+      </th>
+      <th>
+        Actions
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-ticket>
+    <tr>
+      <td>{{ ticket.id }}</td>
+      <td>{{ ticket.title }}</td>
+      <td>{{ ticket.status.statusTitle }}</td>
+      <td>{{ ticket.type.type }}</td>
+      <td>{{ ticket.owner.name }}</td>
+      <td>
+        <button type="button" class="btn btn-md btn-info " (click)="goTo(ticket.id)">
+          <fa-icon [icon]="faEye"></fa-icon>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+</div>

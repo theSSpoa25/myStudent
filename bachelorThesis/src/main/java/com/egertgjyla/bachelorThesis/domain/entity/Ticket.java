@@ -28,7 +28,7 @@ public class Ticket implements Serializable {
     @Column(length = 300)
     private String title;
 
-    @Lob
+    @Column(columnDefinition = "clob")
     private String description;
 
     @ManyToOne

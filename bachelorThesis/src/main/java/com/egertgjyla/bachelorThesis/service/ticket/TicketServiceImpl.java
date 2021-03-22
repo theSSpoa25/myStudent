@@ -1,10 +1,7 @@
 package com.egertgjyla.bachelorThesis.service.ticket;
 
 import com.egertgjyla.bachelorThesis.config.other.ModelMapperConfig;
-import com.egertgjyla.bachelorThesis.domain.dto.ticket.ChangeAssigneeDto;
-import com.egertgjyla.bachelorThesis.domain.dto.ticket.CreateTicketDto;
-import com.egertgjyla.bachelorThesis.domain.dto.ticket.StatusDto;
-import com.egertgjyla.bachelorThesis.domain.dto.ticket.TicketDto;
+import com.egertgjyla.bachelorThesis.domain.dto.ticket.*;
 import com.egertgjyla.bachelorThesis.domain.entity.Status;
 import com.egertgjyla.bachelorThesis.domain.entity.Ticket;
 import com.egertgjyla.bachelorThesis.domain.entity.Type;
@@ -21,7 +18,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TicketServiceImpl implements ITicketService {
@@ -124,6 +123,16 @@ public class TicketServiceImpl implements ITicketService {
         ticket.setUpdatedAt(new Timestamp(date.getTime()));
         ticket.setTitle(title);
         ticketRepository.save(ticket);
+    }
+
+    @Override
+    @Transactional
+    public List<TicketDto> getAllTickets(Long userId) {
+        List<Ticket> tickets = ticketRepository.getAllTickets(userId);
+        return tickets
+                .stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     private TicketDto convertToDto(Ticket ticket) {

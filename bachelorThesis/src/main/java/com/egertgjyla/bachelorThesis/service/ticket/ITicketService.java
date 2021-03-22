@@ -7,6 +7,8 @@ import com.egertgjyla.bachelorThesis.domain.dto.ticket.TicketDto;
 import com.egertgjyla.bachelorThesis.domain.entity.Status;
 import com.egertgjyla.bachelorThesis.domain.pojo.StatusPojo;
 
+import java.util.List;
+
 public interface ITicketService {
     Long createTicket(CreateTicketDto createTicketDto);
     TicketDto getTicketById(Long ticketId);
@@ -14,4 +16,5 @@ public interface ITicketService {
     void changeStatus(Long id, StatusPojo statusPojo);
     void changeAssignee(Long id, ChangeAssigneeDto changeAssigneeDto);
     void changeTitle(Long id, String title);
+    List<TicketDto> getAllTickets(Long id);
 }
