@@ -11,7 +11,9 @@ import {
   switchMap,
   tap
 } from 'rxjs/operators';
+import { PushTokenState } from 'src/app/store/reducers/push-token.reducer';
 import { UserState } from 'src/app/store/reducers/user.reducer';
+import { getPushToken } from 'src/app/store/selectors/push-token.selectors';
 import { getUser } from 'src/app/store/selectors/user.selectors';
 import { CreateTicket } from 'src/app/_models/ticket/create-ticket';
 import { Type } from 'src/app/_models/ticket/type';
@@ -19,6 +21,7 @@ import { User } from 'src/app/_models/user/User';
 import { TicketService } from 'src/app/_services/api/ticket.service';
 import { TypeService } from 'src/app/_services/api/type.service';
 import { UserService } from 'src/app/_services/api/user.service';
+import { MessagingService } from 'src/app/_services/messaging.service';
 
 @Component({
   selector: 'app-create-ticket',
@@ -41,6 +44,7 @@ export class CreateTicketComponent implements OnInit {
   users$: Observable<User[]>;
   userLoading = false;
   userInput$ = new Subject<string>();
+  pushToken: string;
 
   constructor(
     private fb: FormBuilder,
@@ -48,8 +52,10 @@ export class CreateTicketComponent implements OnInit {
     private userService: UserService,
     private ticketService: TicketService,
     private store: Store<UserState>,
+    private tokenStore: Store<PushTokenState>,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private messagingService: MessagingService
   ) {
     this.store
       .pipe(select(getUser))
@@ -58,10 +64,16 @@ export class CreateTicketComponent implements OnInit {
           this.user = user;
           this.createForm.get('ownerId').setValue(this.user.id);
           this.createForm.get('ownerId').patchValue(this.user.id);
-          console.log(user)
         })
       )
       .subscribe();
+
+    this.tokenStore.pipe(select(getPushToken)).subscribe(
+      tokenState => {
+        console.log(tokenState)
+        this.pushToken = tokenState.token
+      }
+    )
   }
 
   ngOnInit(): void {
@@ -93,9 +105,7 @@ export class CreateTicketComponent implements OnInit {
 }
 
   public onSubmit() {
-    console.log(this.createForm.value);
-
-    const createForm: CreateTicket = new CreateTicket(this.createForm.value);
+        const createForm: CreateTicket = new CreateTicket(this.createForm.value);
 
     this.ticketService.createTicket(createForm).pipe(
       catchError(e => {
@@ -106,6 +116,10 @@ export class CreateTicketComponent implements OnInit {
     .subscribe(
       res => {
         this.toastr.success('Ticket is created', 'Create ticket');
+
+        if (this.createForm.value.assignee.roles.map(role => role.role.toLowerCase()).includes('admin')) {
+          this.messagingService.sendPushNotification('Pershendetje', this.pushToken, 'Nje kerkese e re per ju').subscribe()
+        }
         this.router.navigate([`/ticket/${res}`]);
       },
       e => {

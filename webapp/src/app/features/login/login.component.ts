@@ -5,7 +5,6 @@ import { catchError, first, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserState } from 'src/app/store/reducers/user.reducer';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import { userLogin } from 'src/app/store/actions/user.actions';
 import { Router } from '@angular/router';
 

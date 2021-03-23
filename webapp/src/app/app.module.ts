@@ -21,6 +21,11 @@ import { HomeComponent } from './features/home/home.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireMessagingModule} from '@angular/fire/messaging';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { MessagingService } from './_services/messaging.service';
 
 @NgModule({
   declarations: [
@@ -54,13 +59,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       }
     ), // ToastrModule added
     BrowserAnimationsModule,
+    AngularFireMessagingModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(environment.firebase)
+
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
-    }
+    },
+    MessagingService
   ],
   bootstrap: [AppComponent],
 

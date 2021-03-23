@@ -4,7 +4,17 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://localhost:8080/api'
+  apiEndpoint: 'http://localhost:8080/api',
+  firebase: {
+    apiKey: "AIzaSyC99eJxyioq4T1etaCCiEB3SNZ4TWnsLmw",
+    authDomain: "bachelor-thesis-692b7.firebaseapp.com",
+    projectId: "bachelor-thesis-692b7",
+    storageBucket: "bachelor-thesis-692b7.appspot.com",
+    messagingSenderId: "54190048955",
+    appId: "1:54190048955:web:b0b162ce32435989a78b9e",
+    measurementId: "G-MW68GWDSF1"
+  },
+  serverId: 'AAAADJ36hrs:APA91bFmHPqw3xbkzEpDA2MjOWdYJk2Pq1mYP9hC2xqOrFxgBdFfpeeTNRHydLVocnQcbIQFmLEtbroplPb54zX_l_7bYn62HYcMFWKuM04c4T7hQ6aJUepyOfLkc9L4UDgano0kpZiw'
 };
 
 /*
