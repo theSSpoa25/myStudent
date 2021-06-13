@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { faEye, faTrash, faUserEdit, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
 import { User } from 'src/app/_models/user/User';
@@ -35,7 +36,9 @@ export class UsersPresentationComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   faEye = faEye;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -61,5 +64,9 @@ export class UsersPresentationComponent implements OnInit {
 
   onActivateUser(value: number) {
     this.activateUser.emit(value);
+  }
+
+  goTo(id: number) {
+    this.router.navigate([`/user/${id}/edit`]);
   }
 }

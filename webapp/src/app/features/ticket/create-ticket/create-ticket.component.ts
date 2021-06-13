@@ -115,7 +115,7 @@ export class CreateTicketComponent implements OnInit {
     )
     .subscribe(
       res => {
-        this.toastr.success('Ticket is created', 'Create ticket');
+        this.toastr.success('Kerkesa u krijua me sukses', 'Krijo kerkese');
 
         if (this.createForm.value.assignee.roles.map(role => role.role.toLowerCase()).includes('admin')) {
           this.messagingService.sendPushNotification('Pershendetje', this.pushToken, 'Nje kerkese e re per ju').subscribe()

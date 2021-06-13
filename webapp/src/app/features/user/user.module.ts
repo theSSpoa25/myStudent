@@ -15,6 +15,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TableModule } from 'primeng/table';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     NgxDatatableModule,
     FontAwesomeModule,
     ModalModule.forRoot(),
-    FileUploadModule
+    FileUploadModule,
+    TableModule
   ]
 })
 export class UserModule { }

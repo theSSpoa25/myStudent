@@ -3,18 +3,18 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    Create User
+                    Krijo Perdorues
                 </div>
                 <div class="card-body">
                     <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
                         <div class="form-row">
                          <div class="form-group col-md-6">
-                           <label>Name</label>
-                           <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                           <label>Emer</label>
+                           <input type="text" class="form-control" placeholder="Emer" formControlName="name">
                          </div>
                          <div class="form-group col-md-6">
-                           <label>Surname</label>
-                           <input type="text" class="form-control" placeholder="Surname" formControlName="surname">
+                           <label>Mbiemer</label>
+                           <input type="text" class="form-control" placeholder="Mbiemer" formControlName="surname">
                          </div>
                        </div>
                        <div class="form-row">
@@ -23,40 +23,40 @@
                            <input type="text" class="form-control" placeholder="Username" formControlName="username">
                          </div>
                          <div class="form-group col-md-6">
-                           <label>Roles</label>
+                           <label>Roli</label>
                            <ng-select
                                [items]="roles"
                                [multiple]="true"
                                [closeOnSelect]="false"
                                [searchable]="false"
-                               placeholder="Select role"
+                               placeholder="Zgjidh Rolin"
                                formControlName="roles"
                                >
                            </ng-select>
                        </div>
                        </div>
-                       
+
                        <div class="form-group">
-                         <label for="inputAddress">Address</label>
-                         <input type="text" class="form-control" placeholder="Address" formControlName="address">
+                         <label for="inputAddress">Adresa</label>
+                         <input type="text" class="form-control" placeholder="Adresa" formControlName="address">
                        </div>
                        <div class="form-group">
                          <label for="inputAddress">Email</label>
                          <input type="email" class="form-control" placeholder="Email" formControlName="email">
                        </div>
-     
+
                      <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Password</label>
+                            <label>Fjalkalimi</label>
                             <input type="password" class="form-control form-control-md" formControlName="password" autocomplete="off">
                           </div>
                         <div class="form-group col-md-6">
-                            <label>Confirm password</label>
+                            <label>Konfirmo fjalkalimin</label>
                             <input type="password" class="form-control form-control-md" formControlName="confirm">
                         </div>
                      </div>
                      <div class="form-group">
-                         <button type="submit" class="btn btn-primary">Submit</button>
+                         <button type="submit" class="btn btn-primary">Krijo</button>
                      </div>
                  </form>
                 </div>

@@ -1,6 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
 import { LoginResponse } from "src/app/_models/authentication/LoginResponse";
-import { User } from "src/app/_models/user/User";
 import * as UserActions from '../actions/user.actions';
 
 export interface UserState extends LoginResponse {
@@ -29,9 +28,9 @@ export const userReducer = createReducer<UserState>(
             roles: action.user.roles,
             token: action.user.token,
             username: action.user.username,
-            name: action.user.name,
-            surname: action.user.surname,
-            address: action.user.address,
+            name: action.user.surname,
+            surname: action.user.address,
+            address: action.user.name,
             active: action.user.active
         }
     }),

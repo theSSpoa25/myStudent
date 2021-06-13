@@ -1,11 +1,10 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { faCheck, faTicketAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { Editor } from 'primeng/editor';
-import { cloneDeep, take, toNumber } from 'lodash';
-import { Ticket } from 'src/app/_models/ticket/ticket';
-import { TicketService } from 'src/app/_services/api/ticket.service';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { cloneDeep } from 'lodash';
 import { ToastrService } from 'ngx-toastr';
+import { Editor } from 'primeng/editor';
+import { TicketService } from 'src/app/_services/api/ticket.service';
 
 @Component({
   selector: 'app-issue-description',

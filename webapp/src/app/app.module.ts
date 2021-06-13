@@ -26,6 +26,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { MessagingService } from './_services/messaging.service';
+import {ChartModule} from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -62,8 +63,9 @@ import { MessagingService } from './_services/messaging.service';
     AngularFireMessagingModule,
     AngularFireAuthModule,
     AngularFireMessagingModule,
-    AngularFireModule.initializeApp(environment.firebase)
-
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    ChartModule
   ],
   providers: [
     {

@@ -11,8 +11,8 @@
                           <div class="username">
                             <span class="ml-2"><strong>{{user?.name}} {{user?.surname}}</strong></span>
                           </div>
-                          <span class="text-primary mx-2" (click)="toggleUploader()">Change profile picture</span>
-                          <span class="text-danger">Remove</span>
+                          <span class="text-primary mx-2" (click)="toggleUploader()">Ndrysho foton e profilit</span>
+                          <span class="text-danger">Hiq</span>
 
                           <div class="file-upload-container" *ngIf="isUploaderVisible">
                             <div id="fileUploadDiv" class="file-upload-handler">
@@ -20,7 +20,7 @@
                                 [uploader]="uploader" (onFileDrop)="onFileSelected()" class="my-drop-zone" (click)="fileInput.click()">
 
                                 <span *ngIf="hasBaseDropZoneOver && !uploader?.queue?.length">
-                                  Upload Your file here
+                                  Ngarko foton ketu
                                 </span>
 
                                 <input  type="file" #fileInput ng2FileSelect
@@ -32,7 +32,7 @@
                                   style="width: 100px;" [ngClass]="{'lion-button-mandatory ': !this.uploader.queue.length }">Browse</button>
                                 <button type="button" class="lion-button lion-button-text ml-2"
                                   (click)="uploadProfilePicutre()"
-                                  [ngClass]="{'lion-button-mandatory ': this.uploader.queue.length, 'lion-button-inactive':!this.uploader.queue.length}">Upload</button>
+                                  [ngClass]="{'lion-button-mandatory ': this.uploader.queue.length, 'lion-button-inactive':!this.uploader.queue.length}">Ngarko</button>
                               </div>
                             </div>
                           </div>
@@ -47,18 +47,18 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    About
+                    Detajet
                 </div>
                 <div class="card-body">
                         <form [formGroup]="userForm">
                           <div class="form-row">
                             <div class="form-group col-md-6">
-                              <label>Name</label>
-                              <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                              <label>Emer</label>
+                              <input type="text" class="form-control" placeholder="Emer" formControlName="name">
                             </div>
                             <div class="form-group col-md-6">
-                              <label>Surname</label>
-                              <input type="text" class="form-control" placeholder="Surname" formControlName="surname">
+                              <label>Mbiemer</label>
+                              <input type="text" class="form-control" placeholder="Mbiemer" formControlName="surname">
                             </div>
                           </div>
                           <div class="form-row">
@@ -67,13 +67,13 @@
                               <input type="text" class="form-control" placeholder="Username" formControlName="username">
                             </div>
                             <div class="form-group col-md-6">
-                              <label>Roles</label>
+                              <label>Roli</label>
                               <ng-select
                                   [items]="roles"
                                   [multiple]="true"
                                   [closeOnSelect]="false"
                                   [searchable]="false"
-                                  placeholder="Select role"
+                                  placeholder="Zgjidh rolin"
                                   formControlName="roles"
                                   >
                               </ng-select>
@@ -81,16 +81,16 @@
                           </div>
 
                           <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" placeholder="Address" formControlName="address">
+                            <label for="inputAddress">Adresa</label>
+                            <input type="text" class="form-control" placeholder="Adresa" formControlName="address">
                           </div>
                           <div class="form-group">
                             <label for="inputAddress">Email</label>
                             <input type="email" class="form-control" placeholder="Email" formControlName="email">
                           </div>
 
-                          <button type="button" class="btn btn-primary" (click)="saveChanges()">Save Change</button>
-                          <button type="button" class="btn btn-primary ml-2" [ngClass]="{'btn-danger': user.active}">{{user?.active ? 'Deactivate' : 'Activate'}} User</button>
+                          <button type="button" class="btn btn-primary" (click)="saveChanges()">Ruaj ndryshimet</button>
+                          <button type="button" class="btn btn-primary ml-2" [ngClass]="{'btn-danger': user.active}">{{user?.active ? 'Hiq te drejtat' : 'Aktivizo'}}</button>
                         </form>
                 </div>
             </div>

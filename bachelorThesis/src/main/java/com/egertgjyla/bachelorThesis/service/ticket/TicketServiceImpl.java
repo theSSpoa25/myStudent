@@ -7,11 +7,11 @@ import com.egertgjyla.bachelorThesis.domain.entity.Ticket;
 import com.egertgjyla.bachelorThesis.domain.entity.Type;
 import com.egertgjyla.bachelorThesis.domain.entity.User;
 import com.egertgjyla.bachelorThesis.domain.pojo.StatusPojo;
+import com.egertgjyla.bachelorThesis.domain.pojo.ticket.ITicketStats;
 import com.egertgjyla.bachelorThesis.repository.StatusRepository;
 import com.egertgjyla.bachelorThesis.repository.TicketRepository;
 import com.egertgjyla.bachelorThesis.repository.TypeRepository;
 import com.egertgjyla.bachelorThesis.repository.UserRepository;
-import liquibase.change.Change;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -133,6 +133,11 @@ public class TicketServiceImpl implements ITicketService {
                 .stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ITicketStats getTicketStats(Long userId, Integer statusId) {
+        return ticketRepository.getTicketStats(userId, statusId);
     }
 
     private TicketDto convertToDto(Ticket ticket) {

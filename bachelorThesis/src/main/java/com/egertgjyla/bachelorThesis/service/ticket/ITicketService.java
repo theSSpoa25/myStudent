@@ -2,10 +2,9 @@ package com.egertgjyla.bachelorThesis.service.ticket;
 
 import com.egertgjyla.bachelorThesis.domain.dto.ticket.ChangeAssigneeDto;
 import com.egertgjyla.bachelorThesis.domain.dto.ticket.CreateTicketDto;
-import com.egertgjyla.bachelorThesis.domain.dto.ticket.StatusDto;
 import com.egertgjyla.bachelorThesis.domain.dto.ticket.TicketDto;
-import com.egertgjyla.bachelorThesis.domain.entity.Status;
 import com.egertgjyla.bachelorThesis.domain.pojo.StatusPojo;
+import com.egertgjyla.bachelorThesis.domain.pojo.ticket.ITicketStats;
 
 import java.util.List;
 
@@ -17,4 +16,5 @@ public interface ITicketService {
     void changeAssignee(Long id, ChangeAssigneeDto changeAssigneeDto);
     void changeTitle(Long id, String title);
     List<TicketDto> getAllTickets(Long id);
+    ITicketStats getTicketStats(Long userId, Integer statusId);
 }
